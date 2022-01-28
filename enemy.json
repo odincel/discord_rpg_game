@@ -1,0 +1,20 @@
+{
+  "Wolf": {
+    "level": 1,
+    "Attack": 5,
+    "Defence": 4,
+    "Healt": 60
+  },
+  "Imp": {
+    "level": 1,
+    "Attack": 7,
+    "Defence": 3,
+    "Healt": 45
+  },
+  "Jely": {
+    "level": 1,
+    "Attack": 5,
+    "Defence": 2,
+    "Healt": 55
+  }
+}
