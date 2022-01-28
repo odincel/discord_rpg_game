@@ -21,14 +21,14 @@ def hunt(ctx):
   player_attack = user["Attack"]
   player_defence = user["Defence"]
   player_healt = user["Healt"]
-  player_last = user["Last Duel"]
+  player_last = user["Last Hunt"]
 
   enemy = get_enemy(str(ctx.author.id))
   enemy_attack = enemy_dict[enemy]["Attack"]
   enemy_defence = enemy_dict[enemy]["Defence"]
   enemy_healt = enemy_dict[enemy]["Healt"]
 
-  duel_ready = time_control(player_last,1)
+  duel_ready = time_control(player_last,2)
 
   if duel_ready == True:
     turn = 0
@@ -72,30 +72,26 @@ def hunt(ctx):
           }})
         return text
   else:
-
-    pass
+    return duel_ready
        
-
 def get_enemy(player):
   user = get_database()["samurai_rpg"]["users"].find_one({"_id":player})
   enemys = dict((k, v) for k, v in level_dict.items() if v == user["level"]) 
   selected = random.choice(list(enemys.keys()))
   return selected
 
-def duel(ctx):
+def duel(ctx,p1_data,p2_data):
   db = get_database()["samurai_rpg"]["users"]
   
   p1_name = ctx.author.name
   p1_id = str(ctx.author.id)
-  p1_data = db.find_one({"_id":p1_id})
   p1_lvl = p1_data["level"]
 
   p2_name = ctx.mentions[0].name
   p2_id = str(ctx.mentions[0].id)
-  p2_data = db.find_one({"_id":p2_id})
   p2_lvl = p2_data["level"]
 
-  if p1_data == p2_id:
+  if p1_id == p2_id:
     text = "This is not fight club and your not Tyler Durden"
     return ctx.channel.send(text)
 
@@ -114,23 +110,23 @@ def duel_start(ctx,p1_name,p2_name):
   embed_duel.add_field(name = "-", value=text)
   return ctx.channel.send(embed = embed_duel),attack_list
 
-def duel_result(ctx,attack_list,p1_type,p1_name,p1_id,p2_type,p2_name,p2_id):
+def duel_result(ctx,attack_list,p1_type,p1_name,p1_id,p1_data,p2_type,p2_name,p2_id,p2_data):
   db = get_database()["samurai_rpg"]["users"]
 
   p1_att,p1_df,p2_att,p2_df = which_attack(attack_list,p1_type,p2_type)
   
   duel_time = time.time()
 
-  p1_attack = db.find_one({"_id":p1_id})["Attack"] * p1_att
-  p1_defence = db.find_one({"_id":p1_id})["Defence"] * p1_df
-  p1_duel_wins = db.find_one({"_id":p1_id})["Duel Wins"]
-  p1_duel_joins = db.find_one({"_id":p1_id})["Duel Joins"] + 1
+  p1_attack = p1_data["Attack"] * p1_att
+  p1_defence = p1_data["Defence"] * p1_df
+  p1_duel_wins = p1_data["Duel Wins"]
+  p1_duel_joins = p1_data["Duel Joins"] + 1
 
 
-  p2_attack = db.find_one({"_id":p2_id})["Attack"] * p2_att
-  p2_defence = db.find_one({"_id":p2_id})["Defence"] * p2_df
-  p2_duel_wins = db.find_one({"_id":p2_id})["Duel Wins"]
-  p2_duel_joins = db.find_one({"_id":p2_id})["Duel Joins"] + 1 
+  p2_attack = p2_data["Attack"] * p2_att
+  p2_defence = p2_data["Defence"] * p2_df
+  p2_duel_wins = p2_data["Duel Wins"]
+  p2_duel_joins = p2_data["Duel Joins"] + 1 
 
   p1_dmg =  p1_attack - p2_defence 
   p2_dmg =  p2_attack - p1_defence 
@@ -142,7 +138,7 @@ def duel_result(ctx,attack_list,p1_type,p1_name,p1_id,p2_type,p2_name,p2_id):
     p2_dmg = 0
 
   if p1_dmg > p2_dmg:
-    winner = winner = "Winner: " + p1_name
+    winner = "Winner: " + p1_name
     
     p1_update = db.update({"_id":p1_id},{"$set":{"Duel Joins":p1_duel_joins,
     "Duel Wins":p1_duel_wins+1,
@@ -152,7 +148,7 @@ def duel_result(ctx,attack_list,p1_type,p1_name,p1_id,p2_type,p2_name,p2_id):
     "Last Duel":duel_time}})
 
 
-  if p2_dmg > p1_dmg:
+  elif p2_dmg > p1_dmg:
     winner = "Winner: " + p2_name
     p2_update = db.update({"_id":p2_id},{"$set":{"Duel Joins":p2_duel_joins,
     "Duel Wins":p2_duel_wins+1,
@@ -160,7 +156,7 @@ def duel_result(ctx,attack_list,p1_type,p1_name,p1_id,p2_type,p2_name,p2_id):
 
     p1_update = db.update({"_id":p1_id},{"$set":{"Duel Joins":p1_duel_joins,
     "Last Duel":duel_time}})
-
+  
   else:
     winner = "Draw Duel"
 
@@ -192,16 +188,22 @@ def which_attack(attack_list,p1,p2):
   return p1_attack,p1_defence,p2_attack,p2_defence
 
 def time_control(time,cd_time):
-  now = datetime.datetime.now()
-  player = datetime.datetime.fromtimestamp(time)
-  diff = now - player
-
-  if diff > datetime.timedelta(minutes=cd_time):
-    return True
+  combat = False
+  if time == None:
+    combat = True
+    return combat
   else:
-    cooldown = player + datetime.timedelta(minutes = cd_time) - now
-    hour = cd_time//60- int(cooldown.total_seconds()//3600)
-    minutes = int((cooldown.total_seconds()%3600) // 60)
-    seconds = int(cooldown.total_seconds()%60)
-    text = "{}H {}M {}S ".format(hour,minutes,seconds)
-    return text
+    now = datetime.datetime.now()
+    player = datetime.datetime.fromtimestamp(time)
+    diff = now - player
+
+    if diff > datetime.timedelta(minutes=cd_time):
+      combat = True
+      return combat
+    else:
+      cooldown = player + datetime.timedelta(minutes = cd_time) - now
+      hour = int(cooldown.total_seconds()//3600)
+      minutes = int((cooldown.total_seconds()%3600) // 60)
+      seconds = int(cooldown.total_seconds()%60)
+      text = "{}H {}M {}S ".format(hour,minutes,seconds)
+      return text
