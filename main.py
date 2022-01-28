@@ -70,4 +70,4 @@ async def on_message(ctx):
   if ctx.content.startswith("$cooldown"):
     await character.cooldown(ctx)
 
-client.run(os.getenv("DC TOKEN"))
+client.run(os.getenv("DC_TOKEN"))
