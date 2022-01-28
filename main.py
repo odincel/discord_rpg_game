@@ -1,7 +1,6 @@
 import discord
 import os
 
-from sympy import prime
 import character
 import combat
 import asyncio
