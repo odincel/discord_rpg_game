@@ -56,7 +56,6 @@ def create(ctx):
   }
     add_user = users.insert_one(new_user)
 
-
 def item_stat(item_name,items = item_list):
   return items[item_name]["meta"]["stat"]
 
@@ -113,7 +112,7 @@ def cooldown_text(user):
   
   if hunt != None:
     date_hunt = datetime.datetime.fromtimestamp(hunt)
-    cd_hunt = time_text(now,date_hunt,5)
+    cd_hunt = time_text(now,date_hunt,2)
   else:
     cd_hunt = "Ready"
   
@@ -132,9 +131,8 @@ def time_text(now,user_data,cd_time):
     text = "Ready"
   else:
     diff = user_data + datetime.timedelta(minutes = cd_time) - now 
-    hour = cd_time//60- int(diff.total_seconds()//3600)
+    hour = int(diff.total_seconds()//3600)
     minutes = int((diff.total_seconds()%3600) // 60)
     seconds = int(diff.total_seconds()%60)
     text = "{}H {}M {}S ".format(hour,minutes,seconds)
-  
-  return text
+  return text 
