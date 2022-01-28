@@ -1,3 +1,4 @@
+import datetime
 import json
 import discord
 import random
@@ -20,47 +21,60 @@ def hunt(ctx):
   player_attack = user["Attack"]
   player_defence = user["Defence"]
   player_healt = user["Healt"]
+  player_last = user["Last Duel"]
 
   enemy = get_enemy(str(ctx.author.id))
   enemy_attack = enemy_dict[enemy]["Attack"]
   enemy_defence = enemy_dict[enemy]["Defence"]
   enemy_healt = enemy_dict[enemy]["Healt"]
-  
-  turn = 0
-  while player_healt > 0 and enemy_healt > 0:
-    if (turn%2) == 0:
-      #player turn
-      hit = player_attack - enemy_defence
-      if hit <= 0:
-        text = "Draw"
+
+  duel_ready = time_control(player_last,1)
+
+  if duel_ready == True:
+    turn = 0
+    while player_healt > 0 and enemy_healt > 0:
+      if (turn%2) == 0:
+        #player turn
+        hit = player_attack - enemy_defence
+        if hit <= 0:
+          text = "Draw"
+          return text
+        else:
+          enemy_healt -= hit
+          turn += 1
+      else:
+        #enemy turn
+        hit = enemy_attack - player_defence
+        if hit <= 0:
+          turn += 1
+          pass
+        else:
+          player_healt -= hit
+          turn += 1
+
+      if player_healt <= 0:
+        text = "player death"
+        update = db["samurai_rpg"]["users"].update({"_id":str(ctx.author.id)},{"$set":{
+          "Healt":player_healt,
+          "Last Duel":time.time()
+        }})
         return text
-      else:
-        enemy_healt -= hit
-        turn += 1
-    else:
-      #enemy turn
-      hit = enemy_attack - player_defence
-      if hit <= 0:
-        turn += 1
-        pass
-      else:
-        player_healt -= hit
-        turn += 1
+    
+      if enemy_healt <= 0:
+        text = "**{}** killed a **{}** \n Earned {} coins and {} xp. \n {} HP is {}/{}".format(
 
-    if player_healt <= 0:
-      text = "player death"
-      update = db["samurai_rpg"]["users"].update_one({"_id":str(ctx.author.id)},{"$set":{"Healt":player_healt}})
-      return text
-  
-    if enemy_healt <= 0:
-      text = "**{}** killed a **{}** \n Earned {} coins and {} xp. \n {} HP is {}/{}".format(
+          ctx.author.name,enemy.upper(),"**COIN**","**XP**",ctx.author.name,player_healt,user["Max Healt"]
+          
+          )
+        update = db["samurai_rpg"]["users"].update({"_id":str(ctx.author.id)},{"$set":{
+          "Healt":player_healt,
+          "Last Duel":time.time()
+          }})
+        return text
+  else:
 
-        ctx.author.name,enemy.upper(),"**COIN**","**XP**",ctx.author.name,player_healt,user["Max Healt"]
-        
-        )
-      update = db["samurai_rpg"]["users"].update_one({"_id":str(ctx.author.id)},{"$set":{"Healt":player_healt}})
-      return text
-  return ""
+    pass
+       
 
 def get_enemy(player):
   user = get_database()["samurai_rpg"]["users"].find_one({"_id":player})
@@ -81,7 +95,11 @@ def duel(ctx):
   p2_data = db.find_one({"_id":p2_id})
   p2_lvl = p2_data["level"]
 
-  if p1_lvl + 1 == p2_lvl or p1_lvl - 1 == p2_lvl or p1_lvl == p2_lvl:  
+  if p1_data == p2_id:
+    text = "This is not fight club and your not Tyler Durden"
+    return ctx.channel.send(text)
+
+  elif p1_lvl + 1 == p2_lvl or p1_lvl - 1 == p2_lvl or p1_lvl == p2_lvl:  
     text = "{} invate duel to {}".format(p1_name,p2_name)
     return ctx.channel.send(text)
   
@@ -113,8 +131,6 @@ def duel_result(ctx,attack_list,p1_type,p1_name,p1_id,p2_type,p2_name,p2_id):
   p2_defence = db.find_one({"_id":p2_id})["Defence"] * p2_df
   p2_duel_wins = db.find_one({"_id":p2_id})["Duel Wins"]
   p2_duel_joins = db.find_one({"_id":p2_id})["Duel Joins"] + 1 
-
-
 
   p1_dmg =  p1_attack - p2_defence 
   p2_dmg =  p2_attack - p1_defence 
@@ -174,3 +190,18 @@ def which_attack(attack_list,p1,p2):
     p2_attack = attack_dict[attack_list[2]][0]
     p2_defence = attack_dict[attack_list[2]][1]
   return p1_attack,p1_defence,p2_attack,p2_defence
+
+def time_control(time,cd_time):
+  now = datetime.datetime.now()
+  player = datetime.datetime.fromtimestamp(time)
+  diff = now - player
+
+  if diff > datetime.timedelta(minutes=cd_time):
+    return True
+  else:
+    cooldown = player + datetime.timedelta(minutes = cd_time) - now
+    hour = cd_time//60- int(cooldown.total_seconds()//3600)
+    minutes = int((cooldown.total_seconds()%3600) // 60)
+    seconds = int(cooldown.total_seconds()%60)
+    text = "{}H {}M {}S ".format(hour,minutes,seconds)
+    return text
