@@ -3,7 +3,6 @@ import discord
 import random
 import time
 
-from sklearn import ensemble
 import character
 from db import get_database
 

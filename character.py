@@ -1,7 +1,5 @@
-from dataclasses import dataclass
 import json
 import discord
-from psutil import users
 from db import get_database
 import time
 import datetime
