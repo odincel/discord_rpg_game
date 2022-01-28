@@ -56,7 +56,7 @@ def hunt(ctx):
         text = "player death"
         update = db["samurai_rpg"]["users"].update({"_id":str(ctx.author.id)},{"$set":{
           "Healt":player_healt,
-          "Last Duel":time.time()
+          "Last Hunt":time.time()
         }})
         return text
     
@@ -68,7 +68,7 @@ def hunt(ctx):
           )
         update = db["samurai_rpg"]["users"].update({"_id":str(ctx.author.id)},{"$set":{
           "Healt":player_healt,
-          "Last Duel":time.time()
+          "Last Hunt":time.time()
           }})
         return text
   else:
