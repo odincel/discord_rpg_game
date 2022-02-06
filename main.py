@@ -150,4 +150,4 @@ async def on_message(ctx):
   if ctx.content.startswith("meditation"):
     await ctx.channel.send(character.meditation(ctx))
 
-client.run("OTMzMzQyMDQ3NTQzMzg2MTEz.YegIhA.8rvMeXIPdjCrAjBIoCxWxAXJSfo")
+client.run(os.getenv("DC_TOKEN"))
