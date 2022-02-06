@@ -211,7 +211,7 @@ def meditation(ctx):
   db = get_database()["samurai_rpg"]["users"]
   user = db.find_one({"_id":str(ctx.author.id)})
   health = user["Health"]
-  max_health =  health = user["Max Health"]
+  max_health = user["Max Health"]
   player_last = user["Last Meditation"]
   meditation_ready = combat.time_control(player_last,240)
 
