@@ -1,0 +1,163 @@
+{
+  "Imp": {
+    "level": 1,
+    "info":""
+  },
+  "Jelly": {
+    "level": 1,
+    "info":""
+  },
+  "Goblin":{
+    "level":1,
+    "info":""
+  },
+  "Dretch":{
+    "level":1,
+    "info":""
+  },
+  "Swarm Of Rats":{
+    "level":1,
+    "info":""
+  },
+  "Swarm Of Bats":{
+    "level":2,
+    "info":""
+  },
+  "Gnoll":{
+    "level":2,
+    "info":""
+  },
+  "Snake": {
+    "level": 2,
+    "info":""
+  },
+  "Slime":{
+    "level":2,
+    "info":""
+  },
+  "Swarm Of Spiders":{
+    "level":3,
+    "info":""
+  },
+  "Wolf":{
+    "level":3,
+    "info":""
+  },
+  "Blue Slime":{
+    "level":3,
+    "info":""
+  },
+  "Bandit":{
+    "level":3,
+    "info":""
+  },
+  "Gaint Snake":{
+    "level":4,
+    "info":""
+  },
+  "Bear":{
+    "level":4,
+    "info":""
+  },
+  "Yellow Slime":{
+    "level":4,
+    "info":""
+  },
+  "Corrupted Imp":{
+    "level":4,
+    "info":""
+  },
+  "Hobgoblin":{
+    "level":5,
+    "info":""
+  },
+  "Animated Karuta":{
+    "level":5,
+    "info":""
+  },
+  "Wyrmling":{
+    "level":5,
+    "info":""
+  },
+  "Samurai Specter":{
+    "level":5,
+    "info":""
+  },
+  "Enenra":{
+    "level":6,
+    "info":"A monster made of smoke and darkness"
+  },
+  "Gargoyle":{
+    "level":6,
+    "info":""
+  },
+  "Kappa":{
+    "level":6,
+    "info":""
+  },
+  "Funayurei":{
+    "level":6,
+    "info":"The angry ghosts of people who died at sea."
+  },
+  "Furutsubaki-no-rei":{
+    "level":7,
+    "info":"A soul-sucking plant."
+  },
+  "Hihi":{
+    "level":7,
+    "info":""
+  },
+  "Dodomeki":{
+    "level":7,
+    "info":"A female demon with long arms covered in bird's eyes."
+  },
+  "Basilisk":{
+    "level":7,
+    "info":""
+  },
+  "Jikininki":{
+    "level":8,
+    "info":"Ghosts of evil people, that have been condemned to eat human corpses."
+  },
+  "Haradashi":{
+    "level":8,
+    "info":""
+  },
+  "Hibagon":{
+    "level":8,
+    "info":"The Japanese version of Bigfoot or the Yeti."
+  },
+  "Yeti":{
+    "level":8,
+    "info":""
+  },
+ "Kiyohime" :{
+   "level":9,
+   "info":" A woman who transformed into a serpent demon out of the rage of unrequited love."
+ },
+
+"Kotobuki":{
+  "level":9,
+  "info":"A Japanese chimera with the head of a rat, the ears of a rabbit, the horns of an ox, the comb of a rooster, the beard of a sheep, the neck of a dragon, the back of a boar, the shoulders and belly of a tiger, the arms of a monkey, the hindquarters of a dog, and the tail of a snake."
+},
+"Kubikajiri":{
+  "level":9,
+  "info":"A headless beast(ghost) that stinks of blood and eats the heads of its victims."
+},
+"Wanyūdō":{
+  "level":9,
+  "info":"A flaming wheel with a man's head in the center, that sucks out the soul of anyone who sees it."
+},
+"Jorogumo":{
+  "level":9,
+  "info":"Enormous, spider-like demons. In most stories, they’re depicted as evil and hungry for human flesh. In order to catch prey, they can disguise themselves as attractive women."
+}
+
+
+
+
+
+
+
+
+}

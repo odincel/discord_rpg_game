@@ -3,6 +3,8 @@ import discord
 from db import get_database
 import time
 import datetime
+import combat
+
 
 """
   {
@@ -14,8 +16,8 @@ import datetime
       "Stat":{
         "Attack":int(item_stat("Wooden Sword")),
         "Defence":int(item_stat("Leather Armor")),
-        "Healt":100,
-        "Max Healt":100
+        "Health":100,
+        "Max Health":100
       },
       "Equipment":{
         "Weapon":"Wooden Sword",
@@ -29,7 +31,8 @@ import datetime
   }
 """
 
-item_list = json.load(open("items.json"))
+shop_list = json.load(open("data/shop.json"))
+levels = json.load(open("data/levels.json"))
 
 def create(ctx):
   db = get_database()
@@ -41,23 +44,26 @@ def create(ctx):
     new_user = {
     "_id":str(ctx.author.id),
       "level":1,
+      "total_xp":0,
       "XP":0,
       "Attack":5,
       "Defence":5,
-      "Healt":100,
-      "Max Healt":100,
+      "Health":100,
+      "Max Health":100,
       "Weapon":None,
       "Armor":None,
       "Gold":0,
       "Last Hunt":None,
       "Last Duel":None,
+      "Last Meditation":None,
       "Duel Joins":0,
-      "Duel Wins":0
+      "Duel Wins":0,
+      "Inventory":{
+        "Health Potion":1
+      }
   }
     add_user = users.insert_one(new_user)
-
-def item_stat(item_name,items = item_list):
-  return items[item_name]["meta"]["stat"]
+    return profile(ctx)
 
 def profile(ctx):
   
@@ -68,47 +74,62 @@ def profile(ctx):
   embed_profile =  discord.Embed(title=ctx.author.name +"'s profile" , color=0xFFFF00)
   embed_profile.set_thumbnail(url=ctx.author.avatar_url)
 
-  embed_profile.add_field(name="PROGRESS", value = "**Level**: " + str(user["level"]) + "\n **XP**:" +str(user["XP"]) , inline=False)
-  embed_profile.add_field(name="STAT", value = "**Attack**: " + str(user["Attack"]) + "\n **Defence**:" +str(user["Defence"]) + "\n **HP**:" + str(user["Healt"]), inline=False)
-
-  embed_profile.add_field(name = "EQUIPMENT",value = "**Weapon**: " + str(user["Weapon"]) + "\n **Armor**:" +str(user["Armor"]), inline=True )
+  embed_profile.add_field(name="PROGRESS", value = "**Level**: " + str(user["level"]) + "\n**XP**: " +str(int(user["XP"]))+ "/" + str(levels[str(user["level"]+1)]["total_xp"]-levels[str(user["level"])]["total_xp"]), inline=True)
+  embed_profile.add_field(name="STAT", value = "**Attack**: " + str(user["Attack"]) + "\n**Defence**: " +str(user["Defence"]) + "\n**HP**: " + str(user["Health"]) + "/" + str(user["Max Health"]), inline=True)
+  embed_profile.add_field(name="\u200b", value="\u200b", inline=False)
+  embed_profile.add_field(name = "EQUIPMENT",value = "**Weapon**: " + str(user["Weapon"]) + "\n**Armor**:" +str(user["Armor"]), inline=True )
   embed_profile.add_field(name = "MONEY",value = "**Gold**: " + str(user["Gold"]), inline=True )
   
   if user["Duel Joins"] != 0:
-    percent = user["Duel Wins"]/user["Duel Joins"]*100
+    percent = int(user["Duel Wins"]/user["Duel Joins"]*100)
   else:
     percent = 0
-  duel_text = "**Duel Join:** {} \n **Duel Wins:** {} \n **Win Rate:** {}%".format(user["Duel Joins"],user["Duel Wins"],percent)
-  embed_profile.add_field(name = "DUEL", value = duel_text, inline=False)
+  duel_text = "**Duel Join:** {} \n**Duel Wins:** {} \n**Win Rate:** {}%".format(user["Duel Joins"],user["Duel Wins"],percent)
+  embed_profile.add_field(name = "DUEL", value = duel_text, inline=True)
 
   return ctx.channel.send(embed=embed_profile)
-
-class level_system:
-
-  def check_level(ctx):
-    user = get_database()["samurai_rpg"]["users"].find_one({"_id":str(ctx.author.id)})
-    return user
   
 def heal(ctx):
+  item = ctx.content.replace("heal ","").replace(" ","").lower()
+
   db = get_database()["samurai_rpg"]["users"]
-  user_max_healt = db.find_one({"_id":str(ctx.author.id)})["Max Healt"]
-  heal = db.update_one({"_id":str(ctx.author.id)},{"$set":{"Healt":user_max_healt}})
-  text = "HEAL"
-  return text
+  user = db.find_one({"_id":str(ctx.author.id)})
+  inv = user["Inventory"]
+  user_health = user["Health"]
+  user_max_health = user["Max Health"]
+  health_potion = inv[shop_list[item]["name"]]
+
+  if health_potion > 0 and user_health != user_max_health and shop_list[item]["type"]=="potion":
+    user_max_health = user["Max Health"]
+    inv[shop_list[item]["name"]] -=1
+    health = shop_list[item]["stat"]+user_health if user_max_health > shop_list[item]["stat"]+user_health else user_max_health
+    heal = db.update({"_id":str(ctx.author.id)},{"$set":{
+      "Health":health,
+      "Inventory":inv
+      }})
+    text = f"{ctx.author.name}, you drank the elixir and recovered your soul.\nYou've restored {shop_list[item]['stat']} health, now your health is {health}"
+    return text
+  elif user_health == user_max_health:
+    text = "Your health already full"
+    return text
+  else:
+    text = "You need buy heal potion.\n`!buy [potion]`"
+    return text
 
 def cooldown(ctx):
   db = get_database()["samurai_rpg"]["users"]
   user = db.find_one({"_id":str(ctx.author.id)})
   text = cooldown_text(user)
   embed_cd = discord.Embed(title = discord.Embed.Empty,color = 0x2f5696)
-  embed_cd.set_footer(text = "{}'s cooldowns".format(ctx.author.name), icon_url = ctx.author.avatar_url)
-  embed_cd.add_field(name=discord.Embed.Empty,value=text)
+  embed_cd.set_author(name = "{}'s cooldowns".format(ctx.author.name), icon_url = ctx.author.avatar_url)
+  embed_cd.add_field(name="Combat",value=text)
   return ctx.channel.send(embed=embed_cd)
 
 def cooldown_text(user):
   now = datetime.datetime.now()
   hunt = user["Last Hunt"]
   duel = user["Last Duel"]
+  meditation = user["Last Meditation"]
   
   if hunt != None:
     date_hunt = datetime.datetime.fromtimestamp(hunt)
@@ -121,8 +142,14 @@ def cooldown_text(user):
     cd_duel = time_text(now,date_duel,120)
   else:
     cd_duel = "Ready"
+  
+  if meditation!= None:
+    date_meditation = datetime.datetime.fromtimestamp(duel)
+    cd_meditation = time_text(now,date_meditation,240)
+  else:
+    cd_meditation = "Ready"
 
-  text = "**Hunt**:{} \n **Duel**: {}".format(cd_hunt,cd_duel)
+  text = "**Hunt**: {} \n**Duel**: {}\n**Meditation**: {}".format(cd_hunt,cd_duel,cd_meditation)
   return text
 
 def time_text(now,user_data,cd_time):
@@ -136,3 +163,72 @@ def time_text(now,user_data,cd_time):
     seconds = int(diff.total_seconds()%60)
     text = "{}H {}M {}S ".format(hour,minutes,seconds)
   return text 
+
+def gain_xp(player,xp):
+  
+  db = get_database()["samurai_rpg"]["users"]
+  user = db.find_one({"_id":player})
+
+  lvl = user["level"]
+  attack = user["Attack"]
+  defence = user["Defence"]
+  total_xp = user["total_xp"] + xp
+  user_xp = user["XP"] + xp
+  max_health = user["Max Health"]
+
+  level_next = levels[str(lvl+1)]["total_xp"] if lvl < 100 else False
+  count = 0
+  
+  if level_next != False: 
+    while total_xp > level_next and 100 > lvl:
+      user_xp = total_xp - levels[str(lvl)]["total_xp"]
+      attack += 5
+      defence += 5
+      max_health +=15
+      lvl += 1
+      count +=1
+      user_xp = total_xp - levels[str(lvl)]["total_xp"]
+      level_next = levels[str(lvl+1)]["total_xp"]
+    
+    update_player = db.update(
+        {"_id":player},{"$set":{
+        "level":lvl,
+        "total_xp":total_xp,
+        "XP":user_xp,
+        "Attack":attack,
+        "Defence":defence,  
+        "Max Health":max_health
+        }})
+  
+    if count == 0:
+      return " "
+    else:
+      return f"\nYou gain **{count}** lvl, +{count*5} attack and  +{count*5} defence"
+  else:
+    return " "
+
+def meditation(ctx):
+  db = get_database()["samurai_rpg"]["users"]
+  user = db.find_one({"_id":str(ctx.author.id)})
+  health = user["Health"]
+  max_health =  health = user["Max Health"]
+  player_last = user["Last Meditation"]
+  meditation_ready = combat.time_control(player_last,240)
+
+  if meditation_ready == True:
+    if max_health != health:
+      heal = db.update({"_id":str(ctx.author.id)},{"$set":{
+      "Health":max_health,
+      "Last Meditation":time.time()
+      }})
+      text = f"{ctx.author.name}, you meditated and recovered your soul.\nNow your health is {health}"
+      return text
+    
+    else:
+      text = "Your health already full"
+      return text
+
+
+  else:
+    text = "You have to wait " + meditation_ready
+    return text

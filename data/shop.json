@@ -1,0 +1,158 @@
+{
+    "basichealthpotion":{
+        "name":"Basic Health Potion",
+        "level":1,
+        "cost":20,
+        "info":"Restore your 50 health.",
+        "type":"potion",
+        "shop page":"basic",
+        "stat":50
+    },
+    "bambutanto":{
+        "name":"Bambu Tanto",
+        "level":2,
+        "cost":50,
+        "info":"+1 attack 2 levels required",
+        "type":"Weapon",
+        "shop page":"basic",
+        "stat":1
+    },
+    "clotharmor":{
+        "name":"Cloth Armor",
+        "level":2,
+        "cost":50,
+        "info":"simple armor",
+        "type":"Armor",
+        "shop page":"basic",
+        "stat":1
+    },
+    "stonetanto":{
+        "name":"Stone Tanto",
+        "level":5,
+        "cost":250,
+        "info":"+2 attack 5 levels required",
+        "type":"Weapon",
+        "shop page":"tanto",
+        "stat":2
+    },
+    "irontanto":{
+        "name":"Iron Tanto",
+        "level":10,
+        "cost":500,
+        "info":"+8 attack 10 levels required",
+        "type":"Weapon",
+        "shop page":"tanto",
+        "stat":8
+    },
+    "steeltanto":{
+        "name":"Steel Tanto",
+        "level":15,
+        "cost":1500,
+        "info":"+9 attack 15 levels required",
+        "type":"Weapon",
+        "shop page":"tanto",
+        "stat":9
+    },
+    "bambuwakizashi":{
+        "name":"Bambu Wakizashi",
+        "level":20,
+        "cost":2000,
+        "info":"+15 attack 20 levels required",
+        "type":"Weapon",
+        "shop page":"wakizashi",
+        "stat":15
+    },
+    "stonewakizashi":{
+        "name":"Stone Wakizashi",
+        "level":25,
+        "cost":2500,
+        "info":"+26 attack 25 levels required",
+        "type":"Weapon",
+        "shop page":"wakizashi",
+        "stat":26
+    },
+    "ironwakizashi":{
+        "name":"Iron Wakizashi",
+        "level":30,
+        "cost":5000,
+        "info":"+32 attack 30 levels required",
+        "type":"Weapon",
+        "shop page":"wakizashi",
+        "stat":32
+    },
+    "steelwakizashi":{
+        "name":"Steel Wakizashi",
+        "level":35,
+        "cost":6500,
+        "info":"+33 attack 35 levels required",
+        "type":"Weapon",
+        "shop page":"wakizashi",
+        "stat":33
+    },
+
+
+
+    "bamburarmor":{
+        "name":"Bambu Armor",
+        "level":5,
+        "cost":250,
+        "info":"+2 defence 5 levels required",
+        "type":"Armor",
+        "shop page":"armor",
+        "stat":2
+    },
+    "leatherarmor":{
+        "name":"Leather Armor",
+        "level":10,
+        "cost":500,
+        "info":"+8 defence 10 levels required",
+        "type":"armor",
+        "shop page":"armor",
+        "stat":8
+    },
+    "chainarmor":{
+        "name":"Chain Armor",
+        "level":15,
+        "cost":1500,
+        "info":"+9 attack 15 levels required",
+        "type":"Weapon",
+        "shop page":"armor",
+        "stat":9
+    },
+    "ironarmor":{
+        "name":"Iron Armor",
+        "level":20,
+        "cost":2000,
+        "info":"+15 defence 20 levels required",
+        "type":"Armor",
+        "shop page":"metal armor",
+        "stat":15
+    },
+    "steelarmor":{
+        "name":"Steel Armor",
+        "level":25,
+        "cost":2500,
+        "info":"+26 defence 25 levels required",
+        "type":"",
+        "shop page":"metal armor",
+        "stat":26
+    },
+    "alloyarmor":{
+        "name":"Alloy Armor",
+        "level":30,
+        "cost":5000,
+        "info":"+32 defence 30 levels required",
+        "type":"armor",
+        "shop page":"metal armor",
+        "stat":32
+    },
+    "titaniumarmor":{
+        "name":"Titanium Armor",
+        "level":35,
+        "cost":6500,
+        "info":"+33 defence 35 levels required",
+        "type":"armor",
+        "shop page":"metal armor",
+        "stat":33
+    }
+}
