@@ -221,7 +221,7 @@ def meditation(ctx):
       "Health":max_health,
       "Last Meditation":time.time()
       }})
-      text = f"{ctx.author.name}, you meditated and recovered your soul.\nNow your health is {health}"
+      text = f"{ctx.author.name}, you meditated and recovered your soul.\nNow your health is {max_health}"
       return text
     
     else:
