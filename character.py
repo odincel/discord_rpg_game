@@ -59,7 +59,7 @@ def create(ctx):
       "Duel Joins":0,
       "Duel Wins":0,
       "Inventory":{
-        "Health Potion":1
+        "Basic Health Potion":1
       }
   }
     add_user = users.insert_one(new_user)
