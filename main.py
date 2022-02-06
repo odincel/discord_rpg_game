@@ -93,7 +93,7 @@ async def on_message(ctx):
         await ctx.channel.send(text)
 
       elif p1_cooldown != True and p2_cooldown == True:
-        text = "{}'s need: {} for duel.\n{}'s ready.".format(p1_name,p1_data,p2_name)
+        text = "{}'s need: {} for duel.\n{}'s ready.".format(p1_name,p1_cooldown,p2_name)
         await ctx.channel.send(text)
         
       else:
