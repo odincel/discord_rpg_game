@@ -242,7 +242,7 @@ def leaderboard(ctx,value):
   count = 0
 
   if value == "top":
-    text_leaderboard = "**Top 10 Lederboard**\n`"
+    text_leaderboard = "**Top 10 Lederboard**\n```md"
     for user in db.find().sort("total_xp",-1):
       count +=1
       if count <= 10:
@@ -265,5 +265,5 @@ def leaderboard(ctx,value):
       count +=1
       if count <= 10:
         text_leaderboard+=f"{count}. {user['name'].title()} - {user['Duel Wins']} Wins\n"
-  text_leaderboard+="`"
+  text_leaderboard+="```"
   return ctx.channel.send(text_leaderboard)
