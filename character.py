@@ -242,7 +242,7 @@ def leaderboard(ctx,value):
   count = 0
 
   if value == "top":
-    text_leaderboard = "**Top 10 Lederboard**\n```md"
+    text_leaderboard = "**Top 10 Lederboard**\n```md \n"
     for user in db.find().sort("total_xp",-1):
       count +=1
       if count <= 10:
