@@ -265,6 +265,5 @@ def leaderboard(ctx,value):
       count +=1
       if count <= 10:
         text_leaderboard+=f"{count}. {user['name'].title()} - {user['Duel Wins']} Wins\n"
-  text_leaderboard = text_leaderboard[:-2]
   text_leaderboard+="`"
   return ctx.channel.send(text_leaderboard)
