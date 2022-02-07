@@ -43,6 +43,7 @@ def create(ctx):
   else:
     new_user = {
     "_id":str(ctx.author.id),
+      "name":ctx.author.name,
       "level":1,
       "total_xp":0,
       "XP":0,
@@ -58,6 +59,8 @@ def create(ctx):
       "Last Meditation":None,
       "Duel Joins":0,
       "Duel Wins":0,
+      "Monthly Duel":0,
+      "Weekly Duel":0,
       "Inventory":{
         "Basic Health Potion":1
       }
@@ -133,7 +136,7 @@ def cooldown_text(user):
   
   if hunt != None:
     date_hunt = datetime.datetime.fromtimestamp(hunt)
-    cd_hunt = time_text(now,date_hunt,2)
+    cd_hunt = time_text(now,date_hunt,1)
   else:
     cd_hunt = "Ready"
   
@@ -232,3 +235,36 @@ def meditation(ctx):
   else:
     text = "You have to wait " + meditation_ready
     return text
+
+def leaderboard(ctx,value):
+  
+  db = get_database()["samurai_rpg"]["users"]
+  count = 0
+
+  if value == "top":
+    text_leaderboard = "**Top 10 Lederboard**\n`"
+    for user in db.find().sort("total_xp",-1):
+      count +=1
+      if count <= 10:
+        text_leaderboard+=f"{count}. {user['name'].title()} - {user['level']} level\n"
+  elif value == "weekly":
+    text_leaderboard = "**Weekly Duel Lederboard**\n`"
+    for user in db.find().sort("Weekly Duel",-1):
+      count +=1
+      if count <= 10:
+        text_leaderboard+=f"{count}. {user['name'].title()} - {user['Weekly Duel']} Wins\n"
+  elif value == "monthly":
+    text_leaderboard = "**Monthly Duel Lederboard**\n`"
+    for user in db.find().sort("Monthly Duel",-1):
+      count +=1
+      if count <= 10:
+        text_leaderboard+=f"{count}. {user['name'].title()} - {user['Monthly Duel']} Wins\n"
+  elif value == "duel":
+    text_leaderboard = "**All Time Duel Lederboard**\n`"
+    for user in db.find().sort("Duel Wins",-1):
+      count +=1
+      if count <= 10:
+        text_leaderboard+=f"{count}. {user['name'].title()} - {user['Duel Wins']} Wins\n"
+  text_leaderboard = text_leaderboard[:-2]
+  text_leaderboard+="`"
+  return ctx.channel.send(text_leaderboard)

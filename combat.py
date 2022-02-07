@@ -26,7 +26,7 @@ def hunt(ctx):
   enemy = get_enemy(player_lvl)
   enemy_health,enemy_attack, enemy_defence = enemy_stat(player_lvl)
   xp,gold = xp_gold(player_lvl)
-  hunt_ready = time_control(player_last,2)
+  hunt_ready = time_control(player_last,1)
 
   if hunt_ready == True:
     turn = 0
@@ -100,12 +100,16 @@ def duel_result(ctx,attack_list,p1_type,p1_name,p1_id,p1_data,p2_type,p2_name,p2
   p1_attack = p1_data["Attack"] * 2 * p1_att
   p1_defence = p1_data["Defence"] * p1_df
   p1_duel_wins = p1_data["Duel Wins"]
+  p1_duel_weekly = p1_data["Weekly Duel"]
+  p1_duel_monthly = p1_data["Monthly Duel"]
   p1_duel_joins = p1_data["Duel Joins"] + 1
   p1_lvl = p1_data["level"]
 
   p2_attack = p2_data["Attack"] * 2 * p2_att
   p2_defence = p2_data["Defence"] * p2_df
   p2_duel_wins = p2_data["Duel Wins"]
+  p2_duel_weekly = p2_data["Weekly Duel"]
+  p2_duel_monthly = p2_data["Monthly Duel"]
   p2_duel_joins = p2_data["Duel Joins"] + 1 
   p2_lvl = p2_data["level"]
 
@@ -125,6 +129,8 @@ def duel_result(ctx,attack_list,p1_type,p1_name,p1_id,p1_data,p2_type,p2_name,p2
 
     p1_update = db.update({"_id":p1_id},{"$set":{"Duel Joins":p1_duel_joins,
     "Duel Wins":p1_duel_wins+1,
+    "Monthly Duel":p1_duel_monthly+1,
+    "Weekly Duel":p1_duel_weekly+1,
     "Last Duel":duel_time,
     "Gold":p2_data["Gold"]+int(gold*2)
     }})
@@ -141,6 +147,8 @@ def duel_result(ctx,attack_list,p1_type,p1_name,p1_id,p1_data,p2_type,p2_name,p2
 
     p2_update = db.update({"_id":p2_id},{"$set":{"Duel Joins":p2_duel_joins,
     "Duel Wins":p2_duel_wins+1,
+    "Monthly Duel":p2_duel_monthly+1,
+    "Weekly Duel":p2_duel_weekly+1,
     "Last Duel":duel_time,
     "Gold":p2_data["Gold"]+int(gold*2)
     }})

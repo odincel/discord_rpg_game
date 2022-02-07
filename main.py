@@ -27,7 +27,7 @@ async def on_message(ctx):
     embedVar.add_field(name="Combat commands", value="`train`,`heal`, `duel`, `meditation`", inline=True)
     embedVar.add_field(name="Economy commands", value="`shop`, `buy`, `sell`", inline=True)
     embedVar.add_field(name="Gambling commands", value="Will be added with in future", inline=True)
-    embedVar.add_field(name="Leaderboard", value="Will be added with in future", inline=True)
+    embedVar.add_field(name="Leaderboard", value="`leaderboard top`,`leaderboard duel`,`leaderboard weekly`,`leaderboard monthly`", inline=True)
     await ctx.channel.send(embed=embedVar)
 
   if ctx.content == "profile" :
@@ -149,5 +149,18 @@ async def on_message(ctx):
 
   if ctx.content.startswith("meditation"):
     await ctx.channel.send(character.meditation(ctx))
+
+  if ctx.content.startswith("leaderboard"):
+
+    if ctx.content == "leaderboard top":
+      await character.leaderboard(ctx,"top")
+    if ctx.content == "leaderboard weekly":
+      await character.leaderboard(ctx,"weekly")
+    if ctx.content == "leaderboard monthly":
+      await character.leaderboard(ctx,"monthly")
+    if ctx.content == "leaderboard duel":
+      await character.leaderboard(ctx,"duel")
+      
+    
 
 client.run(os.getenv("DC_TOKEN"))
