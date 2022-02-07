@@ -246,24 +246,24 @@ def leaderboard(ctx,value):
     for user in db.find().sort("total_xp",-1):
       count +=1
       if count <= 10:
-        text_leaderboard+=f"{count}. {user['name'].title()} - {user['level']} level\n"
+        text_leaderboard+=f"{count}. {user['name']} - {user['level']} level\n"
   elif value == "weekly":
     text_leaderboard = "**Weekly Duel Lederboard**\n`"
     for user in db.find().sort("Weekly Duel",-1):
       count +=1
       if count <= 10:
-        text_leaderboard+=f"{count}. {user['name'].title()} - {user['Weekly Duel']} Wins\n"
+        text_leaderboard+=f"{count}. {user['name']} - {user['Weekly Duel']} Wins\n"
   elif value == "monthly":
     text_leaderboard = "**Monthly Duel Lederboard**\n`"
     for user in db.find().sort("Monthly Duel",-1):
       count +=1
       if count <= 10:
-        text_leaderboard+=f"{count}. {user['name'].title()} - {user['Monthly Duel']} Wins\n"
+        text_leaderboard+=f"{count}. {user['name']} - {user['Monthly Duel']} Wins\n"
   elif value == "duel":
     text_leaderboard = "**All Time Duel Lederboard**\n`"
     for user in db.find().sort("Duel Wins",-1):
       count +=1
       if count <= 10:
-        text_leaderboard+=f"{count}. {user['name'].title()} - {user['Duel Wins']} Wins\n"
+        text_leaderboard+=f"{count}. {user['name']} - {user['Duel Wins']} Wins\n"
   text_leaderboard+="```"
   return ctx.channel.send(text_leaderboard)
