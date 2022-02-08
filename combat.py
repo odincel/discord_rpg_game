@@ -210,7 +210,7 @@ def time_control(time,cd_time):
     player = datetime.datetime.fromtimestamp(time)
     diff = now - player
 
-    if diff > datetime.timedelta(seconds=cd_time):
+    if diff > datetime.timedelta(minutes=cd_time):
       combat = True
       return combat
     else:
