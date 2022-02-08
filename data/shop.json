@@ -167,7 +167,7 @@
         "cost": 21500,
         "info": "+87 attack 80 levels required",
         "type": "Weapon",
-        "shop page": "omiyari",
+        "shop page": "omi yari",
         "stat": 87
     },
     "stoneomiyari": {
@@ -176,7 +176,7 @@
         "cost": 23000,
         "info": "+88 attack 85 levels required",
         "type": "Weapon",
-        "shop page": "omiyari",
+        "shop page": "omi yari",
         "stat": 88
     },
     "i\u0307ronomiyari": {
@@ -185,7 +185,7 @@
         "cost": 24500,
         "info": "+94 attack 90 levels required",
         "type": "Weapon",
-        "shop page": "omiyari",
+        "shop page": "omi yari",
         "stat": 94
     },
     "steelomiyari": {
@@ -194,7 +194,7 @@
         "cost": 26000,
         "info": "+95 attack 95 levels required",
         "type": "Weapon",
-        "shop page": "omiyari",
+        "shop page": "omi yari",
         "stat": 95
     },
     "titaniumomiyari": {
@@ -203,7 +203,7 @@
         "cost": 27500,
         "info": "+111 attack 100 levels required",
         "type": "Weapon",
-        "shop page": "omiyari",
+        "shop page": "omi yari",
         "stat": 111
     },
     "bambooarmor": {

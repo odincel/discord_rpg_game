@@ -129,7 +129,7 @@ def shop(ctx):
   if item_name in ("tanto","wakizashi","katana","nagamaki","omiyari","armor","yoroi"):
     page_name = f"{item_name.title()} Shop"
     
-    if item_name in ("tanto","wakizashi","katana","nagamaki","omiyari"):
+    if item_name in ("tanto","wakizashi","katana","nagamaki","omi yari"):
       footer = "!shop [tanto] [wakizashi] [katana] [nagamaki] [omi yari]" 
     
     elif item_name in ("armor","yoroi"):
