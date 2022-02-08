@@ -3,7 +3,7 @@
         "name": "Basic Health Potion",
         "level": 1,
         "cost": 20,
-        "info": "Restore your 50 health.",
+        "info": "Restore 50 health.",
         "type": "potion",
         "shop page": "basic",
         "stat": 50
@@ -278,13 +278,13 @@
         "shop page": "armor",
         "stat": 39
     },
-    "dragonscalearnor": {
-        "name": "Dragon Scale Arnor",
+    "dragonscalearmor": {
+        "name": "Dragon Scale Armor",
         "level": 45,
         "cost": 11000,
         "info": "+40 defence 45 levels required",
         "type": "Armor",
-        "shop page": "arnor",
+        "shop page": "armor",
         "stat": 40
     },
     "meteoritearmor": {

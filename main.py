@@ -21,26 +21,33 @@ async def on_message(ctx):
   if ctx.author == client.user:
     return
 
-  if ctx.content=="help":
+  if ctx.content.lower() == "help":
     embedVar = discord.Embed(title="Commands", color=0xFF0000)
     embedVar.add_field(name="Statistics commands", value="`profile`, `cooldown`,`inventory`", inline=True)
-    embedVar.add_field(name="Combat commands", value="`train`,`heal`, `duel`, `meditation`", inline=True)
+    embedVar.add_field(name="Combat commands", value="`train`,`drink`, `duel`, `meditate`", inline=True)
     embedVar.add_field(name="Economy commands", value="`shop`, `buy`, `sell`", inline=True)
     embedVar.add_field(name="Gambling commands", value="Will be added with in future", inline=True)
     embedVar.add_field(name="Leaderboard", value="`leaderboard top`,`leaderboard duel`,`leaderboard weekly`,`leaderboard monthly`", inline=True)
     await ctx.channel.send(embed=embedVar)
 
-  if ctx.content == "profile" :
+  if ctx.content.lower() == "profile" :
     await character.create(ctx)
   
-  if ctx.content == "train":
+  if ctx.content.lower() == "train":
     await ctx.channel.send(combat.hunt(ctx))
 
-  if ctx.content.startswith("drink"):
+  if ctx.content.lower().startswith("drink"):
+    item = "".join([i for i in ctx.content.replace("buy ","").replace(" ","").lower() if not i.isdigit()])
+    
+    for word in ctx.content.split():
+        if word.isdigit():
+         piece = int(word)
+        else:
+          piece = 1  
     if ctx.content == "drink":
       await ctx.channel.send("**Drink commands**\n`drink basic health potion`\n`health [drink name]`")
     else:
-      await ctx.channel.send(character.heal(ctx))
+      await ctx.channel.send(character.drink(ctx,item,piece))
 
   if ctx.content.startswith("duel"):
     db = get_database()
@@ -107,13 +114,13 @@ async def on_message(ctx):
       text = f"{p1_name} can't invate duel {p2_name}. \n**{p1_name}**: {p1_lvl} lvl\n**{p2_name}**: {p2_lvl} lvl"
       await ctx.channel.send(text)
 
-  if ctx.content == "cooldown" :
+  if ctx.content.lower() == "cooldown" :
     await character.cooldown(ctx)
 
-  if ctx.content == "inventory":
+  if ctx.content.lower() == "inventory":
     await mercantile.inventory(ctx)
   
-  if ctx.content.startswith("shop"):
+  if ctx.content.lower().startswith("shop"):
 
     page_name,footer,text = mercantile.shop(ctx)
 
@@ -125,7 +132,7 @@ async def on_message(ctx):
     else:
        await ctx.channel.send("`shop`")
 
-  if ctx.content.startswith("buy"): 
+  if ctx.content.lower().startswith("buy"): 
     item = "".join([i for i in ctx.content.replace("buy ","").replace(" ","").lower() if not i.isdigit()])
     
     for word in ctx.content.split():
@@ -143,17 +150,17 @@ async def on_message(ctx):
     else:
       await ctx.channel.send(f"<@{str(ctx.author.id)}>, what are you trying to buy?. \nYou can look at the items on `shop` ")
 
-  if ctx.content.startswith("sell"):
+  if ctx.content.lower().startswith("sell"):
 
-    if ctx.content == "sell weapon":
+    if ctx.content.lower() == "sell weapon":
       await ctx.channel.send(mercantile.sell(ctx,"Weapon"))
-    elif ctx.content == "sell armor":
+    elif ctx.content.lower() == "sell armor":
       await ctx.channel.send(mercantile.sell(ctx,"Armor"))
     else:
       await ctx.channel.send("**Sell commands**\n`sell armor`\n`sell weapon`")
 
-  if ctx.content.startswith("meditation"):
-    await ctx.channel.send(character.meditation(ctx))
+  if ctx.content.startswith("meditate"):
+    await ctx.channel.send(character.meditate(ctx))
 
   if ctx.content.startswith("leaderboard"):
 

@@ -92,30 +92,36 @@ def profile(ctx):
 
   return ctx.channel.send(embed=embed_profile)
   
-def drink(ctx):
-  item = ctx.content.replace("heal ","").replace(" ","").lower()
+def drink(ctx,item,piece):
+  if item == "bhp":
+    item = "basichealthpotion"
   if item in ("basichealthpotion"):
     db = get_database()["samurai_rpg"]["users"]
     user = db.find_one({"_id":str(ctx.author.id)})
     inv = user["Inventory"]
+    inv_piece=inv[item]
     user_health = user["Health"]
     user_max_health = user["Max Health"]
     health_potion = inv[shop_list[item]["name"]]
-    if health_potion > 0 and user_health != user_max_health and shop_list[item]["type"]=="potion":
-      user_max_health = user["Max Health"]
-      inv[shop_list[item]["name"]] -=1
-      health = shop_list[item]["stat"]+user_health if user_max_health > shop_list[item]["stat"]+user_health else user_max_health
-      heal = db.update({"_id":str(ctx.author.id)},{"$set":{
-        "Health":health,
-        "Inventory":inv
-        }})
-      text = f"{ctx.author.name}, you drank the elixir and recovered your soul.\nYou've restored {shop_list[item]['stat']} health, now your health is {health}"
-      return text
-    elif user_health == user_max_health:
-      text = "Your health already full"
-      return text
+    if inv_piece >= piece:
+      if health_potion > 0 and user_health != user_max_health and shop_list[item]["type"]=="potion":
+        user_max_health = user["Max Health"]
+        inv[shop_list[item]["name"]] -=1
+        health = shop_list[item]["stat"]+user_health if user_max_health > shop_list[item]["stat"]+user_health else user_max_health
+        heal = db.update({"_id":str(ctx.author.id)},{"$set":{
+          "Health":health,
+          "Inventory":inv
+          }})
+        text = f"{ctx.author.name}, you drank the elixir and recovered your soul.\nYou've restored {shop_list[item]['stat']} health, now your health is {health}"
+        return text
+      elif user_health == user_max_health:
+        text = "Your health already full"
+        return text
+      else:
+        text = "You need buy heal potion.\n`!buy [potion]`"
+        return text
     else:
-      text = "You need buy heal potion.\n`!buy [potion]`"
+      text = f"You don't have enough heal potion. You need to **{inv_piece-inv_piece}** more buy heal potion.\n`!buy [potion]`"
       return text
   else:
     text = "**Drink commands**\n`drink basic health potion`\n`health [drink name]`"
@@ -138,7 +144,7 @@ def cooldown_text(user):
   
   if hunt != None:
     date_hunt = datetime.datetime.fromtimestamp(hunt)
-    cd_hunt = time_text(now,date_hunt,1)
+    cd_hunt = time_text(now,date_hunt,0.5)
   else:
     cd_hunt = "Ready"
   
@@ -212,7 +218,7 @@ def gain_xp(player,xp):
   else:
     return " "
 
-def meditation(ctx):
+def meditate(ctx):
   db = get_database()["samurai_rpg"]["users"]
   user = db.find_one({"_id":str(ctx.author.id)})
   health = user["Health"]
@@ -244,25 +250,25 @@ def leaderboard(ctx,value):
   count = 0
 
   if value == "top":
-    text_leaderboard = "**Top 10 Lederboard**\n```"
+    text_leaderboard = "**Top 10 Leaderboard**\n```"
     for user in db.find().sort("total_xp",-1):
       count +=1
       if count <= 10:
         text_leaderboard+=f"{count}. {user['name']} - {user['level']} level\n"
   elif value == "weekly":
-    text_leaderboard = "**Weekly Duel Lederboard**\n```"
+    text_leaderboard = "**Weekly Duel Leaderboard**\n```"
     for user in db.find().sort("Weekly Duel",-1):
       count +=1
       if count <= 10:
         text_leaderboard+=f"{count}. {user['name']} - {user['Weekly Duel']} Wins\n"
   elif value == "monthly":
-    text_leaderboard = "**Monthly Duel Lederboard**\n```"
+    text_leaderboard = "**Monthly Duel Leaderboard**\n```"
     for user in db.find().sort("Monthly Duel",-1):
       count +=1
       if count <= 10:
         text_leaderboard+=f"{count}. {user['name']} - {user['Monthly Duel']} Wins\n"
   elif value == "duel":
-    text_leaderboard = "**All Time Duel Lederboard**\n```"
+    text_leaderboard = "**All Time Duel Leaderboard**\n```"
     for user in db.find().sort("Duel Wins",-1):
       count +=1
       if count <= 10:

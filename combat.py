@@ -26,7 +26,7 @@ def hunt(ctx):
   enemy = get_enemy(player_lvl)
   enemy_health,enemy_attack, enemy_defence = enemy_stat(player_lvl)
   xp,gold = xp_gold(player_lvl)
-  hunt_ready = time_control(player_last,1)
+  hunt_ready = time_control(player_last,0.5)
 
   if player_health == 0:
     text = f"{ctx.author.name}, you have 0 health right now, it might help to heal\n`heal [potion]`"
@@ -62,7 +62,7 @@ def hunt(ctx):
         }})
         return text
       if user["Health"] == player_health:
-        player_health -= random.randint(0,20)
+        player_health -= random.randint(0,10)*player_lvl
       
       if enemy_health <= 0:
         text = "**{}** killed a **{}** \nEarned **{}** coins and **{}** xp. \n{} HP is {}/{}".format(
