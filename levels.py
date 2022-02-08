@@ -12,12 +12,12 @@ level_list = {
         "total_xp":0
     }
 }
-for i in range(1,100):
-    need = round(xp*mult**(i-1))*round(piece*mult**(i-1))
+for i in range(2,100):
+    need = round(xp*mult**(i))*round(piece*(mult+0.1)**(i))
     total+=need
     level_list[i+1] = {
-        "piece":round(xp*mult**(i-1)),
-        "xp":round(piece*mult**(i-1)),
+        "piece":round(piece*(mult+0.1)**(i)),
+        "xp":round(xp*mult**(i)),
         "total_xp":total
     }
 
