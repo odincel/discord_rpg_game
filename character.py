@@ -101,7 +101,6 @@ def heal(ctx):
   user_health = user["Health"]
   user_max_health = user["Max Health"]
   health_potion = inv[shop_list[item]["name"]]
-
   if health_potion > 0 and user_health != user_max_health and shop_list[item]["type"]=="potion":
     user_max_health = user["Max Health"]
     inv[shop_list[item]["name"]] -=1
@@ -248,19 +247,19 @@ def leaderboard(ctx,value):
       if count <= 10:
         text_leaderboard+=f"{count}. {user['name']} - {user['level']} level\n"
   elif value == "weekly":
-    text_leaderboard = "**Weekly Duel Lederboard**\n`"
+    text_leaderboard = "**Weekly Duel Lederboard**\n```"
     for user in db.find().sort("Weekly Duel",-1):
       count +=1
       if count <= 10:
         text_leaderboard+=f"{count}. {user['name']} - {user['Weekly Duel']} Wins\n"
   elif value == "monthly":
-    text_leaderboard = "**Monthly Duel Lederboard**\n`"
+    text_leaderboard = "**Monthly Duel Lederboard**\n```"
     for user in db.find().sort("Monthly Duel",-1):
       count +=1
       if count <= 10:
         text_leaderboard+=f"{count}. {user['name']} - {user['Monthly Duel']} Wins\n"
   elif value == "duel":
-    text_leaderboard = "**All Time Duel Lederboard**\n`"
+    text_leaderboard = "**All Time Duel Lederboard**\n```"
     for user in db.find().sort("Duel Wins",-1):
       count +=1
       if count <= 10:
