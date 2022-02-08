@@ -37,7 +37,10 @@ async def on_message(ctx):
     await ctx.channel.send(combat.hunt(ctx))
 
   if ctx.content.startswith("heal"):
-    await ctx.channel.send(character.heal(ctx))
+    if ctx.content == "heal":
+      await ctx.channel.send("**Heal commands**\n`heal basic health potion`\n`health [potion name]`")
+    else:
+      await ctx.channel.send(character.heal(ctx))
 
   if ctx.content.startswith("duel"):
     db = get_database()
@@ -144,8 +147,10 @@ async def on_message(ctx):
 
     if ctx.content == "sell weapon":
       await ctx.channel.send(mercantile.sell(ctx,"Weapon"))
-    if ctx.content == "sell armor":
+    elif ctx.content == "sell armor":
       await ctx.channel.send(mercantile.sell(ctx,"Armor"))
+    else:
+      await ctx.channel.send("**Sell commands**\n`sell armor`\n`sell weapon`")
 
   if ctx.content.startswith("meditation"):
     await ctx.channel.send(character.meditation(ctx))
@@ -154,13 +159,14 @@ async def on_message(ctx):
 
     if ctx.content == "leaderboard top":
       await character.leaderboard(ctx,"top")
-    if ctx.content == "leaderboard weekly":
+    elif ctx.content == "leaderboard weekly":
       await character.leaderboard(ctx,"weekly")
-    if ctx.content == "leaderboard monthly":
+    elif ctx.content == "leaderboard monthly":
       await character.leaderboard(ctx,"monthly")
-    if ctx.content == "leaderboard duel":
+    elif ctx.content == "leaderboard duel":
       await character.leaderboard(ctx,"duel")
-      
+    else:
+      await ctx.channel.send("**Leaderboard commands**\n`leaderboard top`\n`leaderboard weekly`\n`leaderboard monthly`\n`leaderboard duel`")
     
 
 client.run(os.getenv("DC_TOKEN"))
