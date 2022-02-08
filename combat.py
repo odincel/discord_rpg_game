@@ -29,7 +29,7 @@ def hunt(ctx):
   hunt_ready = time_control(player_last,0.5)
 
   if player_health == 0:
-    text = f"{ctx.author.name}, you have 0 health right now, it might help to heal\n`heal [potion]`"
+    text = f"{ctx.author.name}, you have 0 health right now, you need to `drink [potion]` or `meditate`"
     return text
   
   elif hunt_ready == True:
@@ -54,17 +54,18 @@ def hunt(ctx):
           player_health -= hit
           turn += 1
 
-      if player_health <= 0:
+      if user["Health"] == player_health:
+        player_health -= random.randint(0,10)*player_lvl
+
+      elif player_health <= 0:
         text = f"**{enemy}** brutally killed **{ctx.author.name}**"
         update = db["samurai_rpg"]["users"].update({"_id":str(ctx.author.id)},{"$set":{
           "Health":0,
           "Last Hunt":time.time()
         }})
         return text
-      if user["Health"] == player_health:
-        player_health -= random.randint(0,10)*player_lvl
       
-      if enemy_health <= 0:
+      elif enemy_health <= 0:
         text = "**{}** killed a **{}** \nEarned **{}** coins and **{}** xp. \n{} HP is {}/{}".format(
 
           ctx.author.name,enemy.upper(),gold,xp,ctx.author.name,player_health,user["Max Health"]

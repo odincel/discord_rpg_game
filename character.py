@@ -124,7 +124,7 @@ def drink(ctx,item,piece):
       text = f"You don't have enough heal potion. You need to **{inv_piece-inv_piece}** more buy heal potion.\n`!buy [potion]`"
       return text
   else:
-    text = "**Drink commands**\n`drink basic health potion`\n`health [drink name]`"
+    text = "**Drink commands**\n`drink basic health potion`\n`drink [drink name]`"
     return text
 
 def cooldown(ctx):
@@ -140,7 +140,7 @@ def cooldown_text(user):
   now = datetime.datetime.now()
   hunt = user["Last Hunt"]
   duel = user["Last Duel"]
-  meditation = user["Last Meditation"]
+  meditation = user["Last Meditate"]
   
   if hunt != None:
     date_hunt = datetime.datetime.fromtimestamp(hunt)
