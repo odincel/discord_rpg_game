@@ -25,7 +25,7 @@ async def on_message(ctx):
   if ctx.content.lower() == "help":
     embedVar = discord.Embed(title="Commands", color=0xFF0000)
     embedVar.add_field(name="Statistics commands", value="`profile`\n`cooldown`\n`inventory`", inline=True)
-    embedVar.add_field(name="Combat commands", value="`train`,`drink`\n`duel [@username]`\n`meditate`", inline=True)
+    embedVar.add_field(name="Combat commands", value="`train`\n`drink`\n`duel [@username]`\n`meditate`", inline=True)
     embedVar.add_field(name="Economy commands", value="`shop`\n`buy [item name]`\n`sell [weapon/armor]`", inline=True)
     embedVar.add_field(name="Gambling commands", value="`cf [head/tail]`", inline=True)
     embedVar.add_field(name="Leaderboard", value="`leaderboard top`\n`leaderboard duel`\n`leaderboard weekly`\n`leaderboard monthly`", inline=True)
@@ -160,10 +160,10 @@ async def on_message(ctx):
     else:
       await ctx.channel.send("**Sell commands**\n`sell armor`\n`sell weapon`")
 
-  if ctx.content.startswith.lower()("meditate"):
+  if ctx.content.lower().startswith("meditate"):
     await ctx.channel.send(character.meditate(ctx))
 
-  if ctx.content.startswith("leaderboard"):
+  if ctx.content.lower().startswith("leaderboard"):
 
     if ctx.content == "leaderboard top":
       await character.leaderboard(ctx,"top")
