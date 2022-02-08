@@ -38,7 +38,7 @@ async def on_message(ctx):
     await ctx.channel.send(combat.hunt(ctx))
 
   if ctx.content.lower().startswith("drink"):
-    item = "".join([i for i in ctx.content.replace("drink ","").replace(" ","").lower() if not i.isdigit()])
+    item = "".join([i for i in ctx.content.lower().replace("drink ","").replace(" ","") if not i.isdigit()])
     
     for word in ctx.content.split():
         if word.isdigit():
