@@ -99,7 +99,7 @@ def drink(ctx,item,piece):
     db = get_database()["samurai_rpg"]["users"]
     user = db.find_one({"_id":str(ctx.author.id)})
     inv = user["Inventory"]
-    inv_piece=inv[item]
+    inv_piece=inv[shop_list[item]["name"]]
     user_health = user["Health"]
     user_max_health = user["Max Health"]
     health_potion = inv[shop_list[item]["name"]]
