@@ -107,7 +107,7 @@ def drink(ctx,item,piece):
       if health_potion > 0 and user_health != user_max_health and shop_list[item]["type"]=="potion":
         user_max_health = user["Max Health"]
         inv[shop_list[item]["name"]] -=1
-        health = shop_list[item]["stat"]+user_health if user_max_health > shop_list[item]["stat"]+user_health else user_max_health
+        health = shop_list[item]["stat"]*piece+user_health if user_max_health > shop_list[item]["stat"]*piece+user_health else user_max_health
         heal = db.update({"_id":str(ctx.author.id)},{"$set":{
           "Health":health,
           "Inventory":inv
