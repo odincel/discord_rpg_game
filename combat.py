@@ -29,7 +29,7 @@ def hunt(ctx):
   hunt_ready = time_control(player_last,1)
 
   if player_health == 0:
-    text = f"{ctx.content.name}, you have 0 health right now, it might help to heal\n `heal [potion]`"
+    text = f"{ctx.author.name}, you have 0 health right now, it might help to heal\n `heal [potion]`"
     return text
   
   elif hunt_ready == True:
