@@ -177,6 +177,6 @@ async def on_message(ctx):
       await ctx.channel.send("**Leaderboard commands**\n`leaderboard top`\n`leaderboard weekly`\n`leaderboard monthly`\n`leaderboard duel`")
     
   if ctx.content.startswith("cf"):
-    await ctx.channel.send(gamble.head_tail(ctx))
+    await gamble.head_tail(ctx)
 
 client.run(os.getenv("DC_TOKEN"))

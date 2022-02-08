@@ -27,6 +27,7 @@ def head_tail(ctx):
                 title="Lost"
                 text = f"You chose {user_text.upper()} and it came {coin_flip.upper()}. You lost {pot} gold"
             update =db.update({"_id":str(ctx.author.id)},{"$set":{"Gold":user_money}})
+            
             embed_coin = discord.Embed(title=discord.Embed.Empty,color = 0x3E8B75)
             embed_coin.set_author(name=ctx.author.name,icon_url=ctx.author.avatar_url)
             embed_coin.add_field(name=title,value=text)
