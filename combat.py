@@ -231,6 +231,6 @@ def xp_gold(lvl):
 
 def enemy_stat(lvl):
   hp = 25+(lvl-1)*25
-  attack = 1 + round(round((lvl//5) + round(lvl//10)*5 + round(lvl//25)*10 + (lvl)*5)*random.uniform(0.9,1.2))
+  attack = 1 + round(round((lvl//5) + round(lvl//10)*5 + round(lvl//25)*10 + (lvl)*5)*random.uniform(0.8,1.2))
   defence = round(round((lvl//5) + round(lvl//10)*5 + round(lvl//25)*10 + (lvl)*5)*random.uniform(0.85,1))-1 
   return hp,attack,defence

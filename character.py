@@ -146,7 +146,7 @@ def cooldown_text(user):
     cd_duel = "Ready"
   
   if meditation!= None:
-    date_meditation = datetime.datetime.fromtimestamp(duel)
+    date_meditation = datetime.datetime.fromtimestamp(meditation)
     cd_meditation = time_text(now,date_meditation,240)
   else:
     cd_meditation = "Ready"
@@ -156,7 +156,7 @@ def cooldown_text(user):
 
 def time_text(now,user_data,cd_time):
   diff = now - user_data
-  if diff > datetime.timedelta(minutes=cd_time):
+  if diff > datetime.timedelta(minutes = cd_time):
     text = "Ready"
   else:
     diff = user_data + datetime.timedelta(minutes = cd_time) - now 

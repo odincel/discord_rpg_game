@@ -28,7 +28,7 @@ def buy(ctx,item,piece):
   player_gold = user["Gold"]
 
   item_type = shop_list[item]["type"]
-  item_cost = shop_list[item]["cost"]
+  item_cost = shop_list[item]["cost"]*piece
 
   if player_gold >= item_cost and user["level"] >= shop_list[item]["level"]:
 
@@ -40,7 +40,6 @@ def buy(ctx,item,piece):
       else:
         inv[shop_list[item]["name"]] = piece
       
-      item_cost *= piece
       gold = player_gold-item_cost
       
       inv[shop_list[item]["name"]] += piece
