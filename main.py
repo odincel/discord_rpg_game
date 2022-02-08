@@ -134,7 +134,7 @@ async def on_message(ctx):
        await ctx.channel.send("`shop`")
 
   if ctx.content.lower().startswith("buy"): 
-    item = "".join([i for i in ctx.content.replace("buy ","").replace(" ","").lower() if not i.isdigit()])
+    item = "".join([i for i in ctx.content.lower().replace("buy ","").replace(" ","") if not i.isdigit()])
     
     for word in ctx.content.split():
         if word.isdigit():
@@ -142,7 +142,7 @@ async def on_message(ctx):
         else:
           piece = 1  
 
-    if ctx.content == "buy":
+    if ctx.content.lower() == "buy":
       await ctx.channel.send(f"<@{str(ctx.author.id)}>, that's true but you specify what you're getting. (`buy [item])` \nYou can check the shop for it. (`shop`)")
 
     elif item in shop_list.keys():
