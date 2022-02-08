@@ -72,7 +72,7 @@ def hunt(ctx):
         text += character.gain_xp(str(ctx.author.id),xp)
         return text
   
-  elif 0 == player_health:
+  elif player_health == 0:
     text = f"{ctx.content.name}, you have 0 health right now, it might help to heal\n `heal [potion]`"
     return text
         
