@@ -36,9 +36,9 @@ async def on_message(ctx):
   if ctx.content == "train":
     await ctx.channel.send(combat.hunt(ctx))
 
-  if ctx.content.startswith("heal"):
-    if ctx.content == "heal":
-      await ctx.channel.send("**Heal commands**\n`heal basic health potion`\n`health [potion name]`")
+  if ctx.content.startswith("drink"):
+    if ctx.content == "drink":
+      await ctx.channel.send("**Drink commands**\n`drink basic health potion`\n`health [drink name]`")
     else:
       await ctx.channel.send(character.heal(ctx))
 
