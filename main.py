@@ -6,6 +6,7 @@ import asyncio
 from db import get_database
 import json
 import mercantile
+import gamble
 
 client = discord.Client()
 shop_list = json.load(open("data/shop.json"))
@@ -26,7 +27,7 @@ async def on_message(ctx):
     embedVar.add_field(name="Statistics commands", value="`profile`, `cooldown`,`inventory`", inline=True)
     embedVar.add_field(name="Combat commands", value="`train`,`drink`, `duel`, `meditate`", inline=True)
     embedVar.add_field(name="Economy commands", value="`shop`, `buy`, `sell`", inline=True)
-    embedVar.add_field(name="Gambling commands", value="Will be added with in future", inline=True)
+    embedVar.add_field(name="Gambling commands", value="`cf [head/tail]`", inline=True)
     embedVar.add_field(name="Leaderboard", value="`leaderboard top`,`leaderboard duel`,`leaderboard weekly`,`leaderboard monthly`", inline=True)
     await ctx.channel.send(embed=embedVar)
 
@@ -175,5 +176,7 @@ async def on_message(ctx):
     else:
       await ctx.channel.send("**Leaderboard commands**\n`leaderboard top`\n`leaderboard weekly`\n`leaderboard monthly`\n`leaderboard duel`")
     
+  if ctx.content.startswith("cf"):
+    await ctx.channel.send(gamble.head_tail(ctx))
 
 client.run(os.getenv("DC_TOKEN"))
