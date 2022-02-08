@@ -160,7 +160,7 @@ async def on_message(ctx):
     else:
       await ctx.channel.send("**Sell commands**\n`sell armor`\n`sell weapon`")
 
-  if ctx.content.startswith("meditate"):
+  if ctx.content.startswith.lower()("meditate"):
     await ctx.channel.send(character.meditate(ctx))
 
   if ctx.content.startswith("leaderboard"):
