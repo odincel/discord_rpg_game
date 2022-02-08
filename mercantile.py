@@ -41,8 +41,7 @@ def buy(ctx,item,piece):
         inv[shop_list[item]["name"]] = piece
       
       gold = player_gold-item_cost
-      
-      inv[shop_list[item]["name"]] += piece
+
       update_player = db.update({"_id":str(ctx.author.id)},{"$set":{
       "Gold":gold,
       "Inventory":inv
@@ -126,15 +125,8 @@ def sell(ctx,item):
 
 def shop(ctx):
   item_name = ctx.content.replace("shop ","").lower() 
-  if ctx.content == "shop":
-    page_name = "Basic Items"
-    footer = "!shop [potion] [tanto] [armor]"
-    text = ""
-    for key in shop_list.keys():
-      if shop_list[key]["shop page"] == "basic":
-        text += "`{}`: {} - **{} gold** \n".format(shop_list[key]["name"],shop_list[key]["info"],shop_list[key]["cost"])
 
-  elif item_name in ("tanto","wakizashi","katana","nagamaki","omiyari","armor","metal armor"):
+  if item_name in ("tanto","wakizashi","katana","nagamaki","omiyari","armor","metal armor"):
     page_name = f"{item_name.title()} Shop"
     
     if item_name in ("tanto","wakizashi"):
@@ -150,5 +142,14 @@ def shop(ctx):
     for key in shop_list.keys():
       if shop_list[key]["shop page"] == item_name:
         text += "`{}`: {} - **{} gold** \n".format(shop_list[key]["name"],shop_list[key]["info"],shop_list[key]["cost"])
+  
+  else:
+    page_name = "Basic Items"
+    footer = "!shop [potion] [tanto] [armor]"
+    text = ""
+    for key in shop_list.keys():
+      if shop_list[key]["shop page"] == "basic":
+        text += "`{}`: {} - **{} gold** \n".format(shop_list[key]["name"],shop_list[key]["info"],shop_list[key]["cost"])  
+
     
   return page_name,footer,text

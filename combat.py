@@ -222,7 +222,7 @@ def xp_gold(lvl):
   xp_multiple = 1.05
 
   gold_base = 8
-  gold_multiple = 1.05
+  gold_multiple = 1.1
 
   xp = int(xp_base*xp_multiple**lvl*random.uniform(0.85,1.15))
   gold = int(gold_base*gold_multiple**lvl*random.uniform(0.85,1.15))
@@ -231,6 +231,6 @@ def xp_gold(lvl):
 
 def enemy_stat(lvl):
   hp = 25+(lvl-1)*25
-  attack = 1 + round(round((lvl//5) + round(lvl//10)*5 + round(lvl//25)*10 + (lvl)*5)*random.uniform(0.8,1.15))
+  attack = 1 + round(round((lvl//5) + round(lvl//10)*5 + round(lvl//25)*10 + (lvl)*5)*random.uniform(0.75,1.15))
   defence = round(round((lvl//5) + round(lvl//10)*5 + round(lvl//25)*10 + (lvl)*5)*random.uniform(0.85,1))-1 
   return hp,attack,defence
