@@ -92,30 +92,33 @@ def profile(ctx):
 
   return ctx.channel.send(embed=embed_profile)
   
-def heal(ctx):
+def drink(ctx):
   item = ctx.content.replace("heal ","").replace(" ","").lower()
-
-  db = get_database()["samurai_rpg"]["users"]
-  user = db.find_one({"_id":str(ctx.author.id)})
-  inv = user["Inventory"]
-  user_health = user["Health"]
-  user_max_health = user["Max Health"]
-  health_potion = inv[shop_list[item]["name"]]
-  if health_potion > 0 and user_health != user_max_health and shop_list[item]["type"]=="potion":
+  if item in ("basichealthpotion"):
+    db = get_database()["samurai_rpg"]["users"]
+    user = db.find_one({"_id":str(ctx.author.id)})
+    inv = user["Inventory"]
+    user_health = user["Health"]
     user_max_health = user["Max Health"]
-    inv[shop_list[item]["name"]] -=1
-    health = shop_list[item]["stat"]+user_health if user_max_health > shop_list[item]["stat"]+user_health else user_max_health
-    heal = db.update({"_id":str(ctx.author.id)},{"$set":{
-      "Health":health,
-      "Inventory":inv
-      }})
-    text = f"{ctx.author.name}, you drank the elixir and recovered your soul.\nYou've restored {shop_list[item]['stat']} health, now your health is {health}"
-    return text
-  elif user_health == user_max_health:
-    text = "Your health already full"
-    return text
+    health_potion = inv[shop_list[item]["name"]]
+    if health_potion > 0 and user_health != user_max_health and shop_list[item]["type"]=="potion":
+      user_max_health = user["Max Health"]
+      inv[shop_list[item]["name"]] -=1
+      health = shop_list[item]["stat"]+user_health if user_max_health > shop_list[item]["stat"]+user_health else user_max_health
+      heal = db.update({"_id":str(ctx.author.id)},{"$set":{
+        "Health":health,
+        "Inventory":inv
+        }})
+      text = f"{ctx.author.name}, you drank the elixir and recovered your soul.\nYou've restored {shop_list[item]['stat']} health, now your health is {health}"
+      return text
+    elif user_health == user_max_health:
+      text = "Your health already full"
+      return text
+    else:
+      text = "You need buy heal potion.\n`!buy [potion]`"
+      return text
   else:
-    text = "You need buy heal potion.\n`!buy [potion]`"
+    text = "**Drink commands**\n`drink basic health potion`\n`health [drink name]`"
     return text
 
 def cooldown(ctx):
