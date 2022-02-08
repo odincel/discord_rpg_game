@@ -121,7 +121,7 @@ def drink(ctx,item,piece):
         text = "You need buy heal potion.\n`!buy [potion]`"
         return text
     else:
-      text = f"You don't have enough heal potion. You need to **{inv_piece-inv_piece}** more buy heal potion.\n`!buy [potion]`"
+      text = f"You don't have enough heal potion. You need to **{piece-inv_piece}** more buy heal potion.\n`!buy [potion]`"
       return text
   else:
     text = "**Drink commands**\n`drink basic health potion`\n`drink [drink name]`"
