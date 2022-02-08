@@ -55,7 +55,7 @@ def hunt(ctx):
           turn += 1
 
       if user["Health"] == player_health:
-        player_health -= random.randint(0,10)*player_lvl
+        player_health -= round(random.randint(0,player_lvl*1,5))
 
       elif player_health <= 0:
         text = f"**{enemy}** brutally killed **{ctx.author.name}**"
@@ -78,8 +78,6 @@ def hunt(ctx):
           }})
         text += character.gain_xp(str(ctx.author.id),xp)
         return text
-  
-        
   else:
     text = "You have to wait "+hunt_ready
     return text

@@ -191,11 +191,10 @@ def gain_xp(player,xp):
   count = 0
   
   if level_next != False: 
-    while total_xp > level_next and 100 > lvl:
-      user_xp = total_xp - levels[str(lvl)]["total_xp"]
+    while total_xp >= level_next and 100 > lvl:
       attack += 5
       defence += 5
-      max_health +=15
+      max_health +=25
       lvl += 1
       count +=1
       user_xp = total_xp - levels[str(lvl)]["total_xp"]
