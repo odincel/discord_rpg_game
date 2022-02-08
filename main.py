@@ -24,11 +24,11 @@ async def on_message(ctx):
 
   if ctx.content.lower() == "help":
     embedVar = discord.Embed(title="Commands", color=0xFF0000)
-    embedVar.add_field(name="Statistics commands", value="`profile`, `cooldown`,`inventory`", inline=True)
-    embedVar.add_field(name="Combat commands", value="`train`,`drink`, `duel [@username]`, `meditate`", inline=True)
-    embedVar.add_field(name="Economy commands", value="`shop`, `buy`, `sell`", inline=True)
+    embedVar.add_field(name="Statistics commands", value="`profile`\n`cooldown`\n`inventory`", inline=True)
+    embedVar.add_field(name="Combat commands", value="`train`,`drink`\n`duel [@username]`\n`meditate`", inline=True)
+    embedVar.add_field(name="Economy commands", value="`shop`\n`buy [item name]`\n`sell [weapon/armor]`", inline=True)
     embedVar.add_field(name="Gambling commands", value="`cf [head/tail]`", inline=True)
-    embedVar.add_field(name="Leaderboard", value="`leaderboard top`,`leaderboard duel`,`leaderboard weekly`,`leaderboard monthly`", inline=True)
+    embedVar.add_field(name="Leaderboard", value="`leaderboard top`\n`leaderboard duel`\n`leaderboard weekly`\n`leaderboard monthly`", inline=True)
     await ctx.channel.send(embed=embedVar)
 
   if ctx.content.lower() == "profile" :
