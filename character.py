@@ -151,7 +151,7 @@ def cooldown_text(user):
   else:
     cd_meditation = "Ready"
 
-  text = "**Hunt**: {} \n**Duel**: {}\n**Meditation**: {}".format(cd_hunt,cd_duel,cd_meditation)
+  text = "**Train**: {} \n**Duel**: {}\n**Meditation**: {}".format(cd_hunt,cd_duel,cd_meditation)
   return text
 
 def time_text(now,user_data,cd_time):
