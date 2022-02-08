@@ -223,14 +223,14 @@ def meditate(ctx):
   user = db.find_one({"_id":str(ctx.author.id)})
   health = user["Health"]
   max_health = user["Max Health"]
-  player_last = user["Last meditate"]
+  player_last = user["Last Meditate"]
   meditate_ready = combat.time_control(player_last,240)
 
   if meditate_ready == True:
     if max_health != health:
       heal = db.update({"_id":str(ctx.author.id)},{"$set":{
       "Health":max_health,
-      "Last meditate":time.time()
+      "Last Meditate":time.time()
       }})
       text = f"{ctx.author.name}, you meditated and recovered your soul.\nNow your health is {max_health}"
       return text

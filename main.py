@@ -25,7 +25,7 @@ async def on_message(ctx):
   if ctx.content.lower() == "help":
     embedVar = discord.Embed(title="Commands", color=0xFF0000)
     embedVar.add_field(name="Statistics commands", value="`profile`, `cooldown`,`inventory`", inline=True)
-    embedVar.add_field(name="Combat commands", value="`train`,`drink`, `duel`, `meditate`", inline=True)
+    embedVar.add_field(name="Combat commands", value="`train`,`drink`, `duel [@username]`, `meditate`", inline=True)
     embedVar.add_field(name="Economy commands", value="`shop`, `buy`, `sell`", inline=True)
     embedVar.add_field(name="Gambling commands", value="`cf [head/tail]`", inline=True)
     embedVar.add_field(name="Leaderboard", value="`leaderboard top`,`leaderboard duel`,`leaderboard weekly`,`leaderboard monthly`", inline=True)
@@ -50,7 +50,7 @@ async def on_message(ctx):
     else:
       await ctx.channel.send(character.drink(ctx,item,piece))
 
-  if ctx.content.startswith("duel"):
+  if ctx.content.lower().startswith("duel"):
     db = get_database()
     p1_name = ctx.author.name
     p1_id = str(ctx.author.id)
@@ -84,7 +84,7 @@ async def on_message(ctx):
           except asyncio.TimeoutError:
               await ctx.channel.send("**{}** didn't reply".format(p2_name))
           else:
-            if reply_message.content == "yes":
+            if reply_message.content.lower() == "yes":
               duel_start, attack_list = combat.duel_start(ctx,p1_name,p2_name)
               await duel_start
               try:
