@@ -29,7 +29,7 @@ def hunt(ctx):
   hunt_ready = time_control(player_last,1)
 
   if player_health == 0:
-    text = f"{ctx.author.name}, you have 0 health right now, it might help to heal\n `heal [potion]`"
+    text = f"{ctx.author.name}, you have 0 health right now, it might help to heal\n`heal [potion]`"
     return text
   
   elif hunt_ready == True:
@@ -236,6 +236,6 @@ def xp_gold(lvl):
 
 def enemy_stat(lvl):
   hp = 25+(lvl-1)*25
-  attack = 1 + round(round((lvl//5) + round(lvl//10)*5 + round(lvl//25)*10 + (lvl)*5)*random.uniform(0.75,1.15))
+  attack = 1 + round(round((lvl//5) + round(lvl//10)*5 + round(lvl//25)*10 + (lvl)*5)*random.uniform(0.75,1.1))
   defence = round(round((lvl//5) + round(lvl//10)*5 + round(lvl//25)*10 + (lvl)*5)*random.uniform(0.85,1))-1 
   return hp,attack,defence
