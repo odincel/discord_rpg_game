@@ -61,7 +61,9 @@ def hunt(ctx):
           "Last Hunt":time.time()
         }})
         return text
-    
+      if user["Health"] == player_health:
+        player_health -= random.randint(0,20)
+      
       if enemy_health <= 0:
         text = "**{}** killed a **{}** \nEarned **{}** coins and **{}** xp. \n{} HP is {}/{}".format(
 
