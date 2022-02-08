@@ -56,7 +56,7 @@ def create(ctx):
       "Gold":0,
       "Last Hunt":None,
       "Last Duel":None,
-      "Last Meditation":None,
+      "Last Meditate":None,
       "Duel Joins":0,
       "Duel Wins":0,
       "Monthly Duel":0,
@@ -140,7 +140,7 @@ def cooldown_text(user):
   now = datetime.datetime.now()
   hunt = user["Last Hunt"]
   duel = user["Last Duel"]
-  meditation = user["Last Meditate"]
+  meditate = user["Last Meditate"]
   
   if hunt != None:
     date_hunt = datetime.datetime.fromtimestamp(hunt)
@@ -154,13 +154,13 @@ def cooldown_text(user):
   else:
     cd_duel = "Ready"
   
-  if meditation!= None:
-    date_meditation = datetime.datetime.fromtimestamp(meditation)
-    cd_meditation = time_text(now,date_meditation,240)
+  if meditate!= None:
+    date_meditate = datetime.datetime.fromtimestamp(meditate)
+    cd_meditate = time_text(now,date_meditate,240)
   else:
-    cd_meditation = "Ready"
+    cd_meditate = "Ready"
 
-  text = "**Train**: {} \n**Duel**: {}\n**Meditation**: {}".format(cd_hunt,cd_duel,cd_meditation)
+  text = "**Train**: {} \n**Duel**: {}\n**Meditate**: {}".format(cd_hunt,cd_duel,cd_meditate)
   return text
 
 def time_text(now,user_data,cd_time):
@@ -223,14 +223,14 @@ def meditate(ctx):
   user = db.find_one({"_id":str(ctx.author.id)})
   health = user["Health"]
   max_health = user["Max Health"]
-  player_last = user["Last Meditation"]
-  meditation_ready = combat.time_control(player_last,240)
+  player_last = user["Last meditate"]
+  meditate_ready = combat.time_control(player_last,240)
 
-  if meditation_ready == True:
+  if meditate_ready == True:
     if max_health != health:
       heal = db.update({"_id":str(ctx.author.id)},{"$set":{
       "Health":max_health,
-      "Last Meditation":time.time()
+      "Last meditate":time.time()
       }})
       text = f"{ctx.author.name}, you meditated and recovered your soul.\nNow your health is {max_health}"
       return text
@@ -241,7 +241,7 @@ def meditate(ctx):
 
 
   else:
-    text = "You have to wait " + meditation_ready
+    text = "You have to wait " + meditate_ready
     return text
 
 def leaderboard(ctx,value):
