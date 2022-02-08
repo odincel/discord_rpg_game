@@ -16,7 +16,7 @@ def head_tail(ctx):
 
     if user_text in ("head","tail"):
         if user_money >= pot:
-            coin_flip = random.choice("head","tail")
+            coin_flip = random.choice(("head","tail"))
             if user_text==coin_flip:
                 pot *=2
                 user_money += pot
