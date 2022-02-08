@@ -126,14 +126,14 @@ def sell(ctx,item):
 def shop(ctx):
   item_name = ctx.content.replace("shop ","").lower() 
 
-  if item_name in ("tanto","wakizashi","katana","nagamaki","omiyari","armor","metal armor"):
+  if item_name in ("tanto","wakizashi","katana","nagamaki","omiyari","armor","yoroi"):
     page_name = f"{item_name.title()} Shop"
     
-    if item_name in ("tanto","wakizashi"):
-      footer = "!shop [tanto] [wakizashi]" 
+    if item_name in ("tanto","wakizashi","katana","nagamaki","omiyari"):
+      footer = "!shop [tanto] [wakizashi] [katana] [nagamaki] [omi yari]" 
     
-    elif item_name in ("armor","metalarmor"):
-      footer = "!shop [armor] [metal armor]"
+    elif item_name in ("armor","yoroi"):
+      footer = "!shop [armor] [yoroi]"
 
     else:
       footer = "!shop [potion] [tanto] [armor]"

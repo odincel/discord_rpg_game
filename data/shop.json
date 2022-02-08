@@ -1,158 +1,389 @@
 {
-    "basichealthpotion":{
-        "name":"Basic Health Potion",
-        "level":1,
-        "cost":20,
-        "info":"Restore your 50 health.",
-        "type":"potion",
-        "shop page":"basic",
-        "stat":50
+    "basichealthpotion": {
+        "name": "Basic Health Potion",
+        "level": 1,
+        "cost": 20,
+        "info": "Restore your 50 health.",
+        "type": "potion",
+        "shop page": "basic",
+        "stat": 50
     },
-    "bambutanto":{
-        "name":"Bambu Tanto",
-        "level":2,
-        "cost":50,
-        "info":"+1 attack 2 levels required",
-        "type":"Weapon",
-        "shop page":"basic",
-        "stat":1
+    "bambootanto": {
+        "name": "Bamboo Tanto",
+        "level": 2,
+        "cost": 50,
+        "info": "+1 attack 2 levels required",
+        "type": "Weapon",
+        "shop page": "basic",
+        "stat": 1
     },
-    "clotharmor":{
-        "name":"Cloth Armor",
-        "level":2,
-        "cost":50,
-        "info":"simple armor",
-        "type":"Armor",
-        "shop page":"basic",
-        "stat":1
+    "clotharmor": {
+        "name": "Cloth Armor",
+        "level": 2,
+        "cost": 50,
+        "info": "+1 defence 2 levels required",
+        "type": "Armor",
+        "shop page": "basic",
+        "stat": 1
     },
-    "stonetanto":{
-        "name":"Stone Tanto",
-        "level":5,
-        "cost":250,
-        "info":"+2 attack 5 levels required",
-        "type":"Weapon",
-        "shop page":"tanto",
-        "stat":2
+    "stonetanto": {
+        "name": "Stone Tanto",
+        "level": 5,
+        "cost": 250,
+        "info": "+2 attack 5 levels required",
+        "type": "Weapon",
+        "shop page": "tanto",
+        "stat": 2
     },
-    "irontanto":{
-        "name":"Iron Tanto",
-        "level":10,
-        "cost":500,
-        "info":"+8 attack 10 levels required",
-        "type":"Weapon",
-        "shop page":"tanto",
-        "stat":8
+    "i\u0307rontanto": {
+        "name": "\u0130ron Tanto",
+        "level": 10,
+        "cost": 1500,
+        "info": "+8 attack 10 levels required",
+        "type": "Weapon",
+        "shop page": "tanto",
+        "stat": 8
     },
-    "steeltanto":{
-        "name":"Steel Tanto",
-        "level":15,
-        "cost":1500,
-        "info":"+9 attack 15 levels required",
-        "type":"Weapon",
-        "shop page":"tanto",
-        "stat":9
+    "steeltanto": {
+        "name": "Steel Tanto",
+        "level": 15,
+        "cost": 2500,
+        "info": "+9 attack 15 levels required",
+        "type": "Weapon",
+        "shop page": "tanto",
+        "stat": 9
     },
-    "bambuwakizashi":{
-        "name":"Bambu Wakizashi",
-        "level":20,
-        "cost":2000,
-        "info":"+15 attack 20 levels required",
-        "type":"Weapon",
-        "shop page":"wakizashi",
-        "stat":15
+    "bamboowakizashi": {
+        "name": "Bamboo Wakizashi",
+        "level": 20,
+        "cost": 3500,
+        "info": "+15 attack 20 levels required",
+        "type": "Weapon",
+        "shop page": "wakizashi",
+        "stat": 15
     },
-    "stonewakizashi":{
-        "name":"Stone Wakizashi",
-        "level":25,
-        "cost":2500,
-        "info":"+26 attack 25 levels required",
-        "type":"Weapon",
-        "shop page":"wakizashi",
-        "stat":26
+    "stonewakizashi": {
+        "name": "Stone Wakizashi",
+        "level": 25,
+        "cost": 5000,
+        "info": "+26 attack 25 levels required",
+        "type": "Weapon",
+        "shop page": "wakizashi",
+        "stat": 26
     },
-    "ironwakizashi":{
-        "name":"Iron Wakizashi",
-        "level":30,
-        "cost":5000,
-        "info":"+32 attack 30 levels required",
-        "type":"Weapon",
-        "shop page":"wakizashi",
-        "stat":32
+    "i\u0307ronwakizashi": {
+        "name": "\u0130ron Wakizashi",
+        "level": 30,
+        "cost": 6500,
+        "info": "+32 attack 30 levels required",
+        "type": "Weapon",
+        "shop page": "wakizashi",
+        "stat": 32
     },
-    "steelwakizashi":{
-        "name":"Steel Wakizashi",
-        "level":35,
-        "cost":6500,
-        "info":"+33 attack 35 levels required",
-        "type":"Weapon",
-        "shop page":"wakizashi",
-        "stat":33
+    "steelwakizashi": {
+        "name": "Steel Wakizashi",
+        "level": 35,
+        "cost": 8000,
+        "info": "+33 attack 35 levels required",
+        "type": "Weapon",
+        "shop page": "wakizashi",
+        "stat": 33
     },
-
-
-
-    "bambuarmor":{
-        "name":"Bambu Armor",
-        "level":5,
-        "cost":250,
-        "info":"+2 defence 5 levels required",
-        "type":"Armor",
-        "shop page":"armor",
-        "stat":2
+    "bambookatana": {
+        "name": "Bamboo Katana",
+        "level": 40,
+        "cost": 9500,
+        "info": "+39 attack 40 levels required",
+        "type": "Weapon",
+        "shop page": "katana",
+        "stat": 39
     },
-    "leatherarmor":{
-        "name":"Leather Armor",
-        "level":10,
-        "cost":500,
-        "info":"+8 defence 10 levels required",
-        "type":"armor",
-        "shop page":"armor",
-        "stat":8
+    "stonekatana": {
+        "name": "Stone Katana",
+        "level": 45,
+        "cost": 11000,
+        "info": "+40 attack 45 levels required",
+        "type": "Weapon",
+        "shop page": "katana",
+        "stat": 40
     },
-    "chainarmor":{
-        "name":"Chain Armor",
-        "level":15,
-        "cost":1500,
-        "info":"+9 attack 15 levels required",
-        "type":"Weapon",
-        "shop page":"armor",
-        "stat":9
+    "i\u0307ronkatana": {
+        "name": "\u0130ron Katana",
+        "level": 50,
+        "cost": 12500,
+        "info": "+56 attack 50 levels required",
+        "type": "Weapon",
+        "shop page": "katana",
+        "stat": 56
     },
-    "ironarmor":{
-        "name":"Iron Armor",
-        "level":20,
-        "cost":2000,
-        "info":"+15 defence 20 levels required",
-        "type":"Armor",
-        "shop page":"metal armor",
-        "stat":15
+    "steelkatana": {
+        "name": "Steel Katana",
+        "level": 55,
+        "cost": 14000,
+        "info": "+57 attack 55 levels required",
+        "type": "Weapon",
+        "shop page": "katana",
+        "stat": 57
     },
-    "steelarmor":{
-        "name":"Steel Armor",
-        "level":25,
-        "cost":2500,
-        "info":"+26 defence 25 levels required",
-        "type":"",
-        "shop page":"metal armor",
-        "stat":26
+    "bamboonagamaki": {
+        "name": "Bamboo Nagamaki",
+        "level": 60,
+        "cost": 15500,
+        "info": "+63 attack 60 levels required",
+        "type": "Weapon",
+        "shop page": "nagamaki",
+        "stat": 63
     },
-    "alloyarmor":{
-        "name":"Alloy Armor",
-        "level":30,
-        "cost":5000,
-        "info":"+32 defence 30 levels required",
-        "type":"armor",
-        "shop page":"metal armor",
-        "stat":32
+    "stonenagamaki": {
+        "name": "Stone Nagamaki",
+        "level": 65,
+        "cost": 17000,
+        "info": "+64 attack 65 levels required",
+        "type": "Weapon",
+        "shop page": "nagamaki",
+        "stat": 64
     },
-    "titaniumarmor":{
-        "name":"Titanium Armor",
-        "level":35,
-        "cost":6500,
-        "info":"+33 defence 35 levels required",
-        "type":"armor",
-        "shop page":"metal armor",
-        "stat":33
+    "i\u0307ronnagamaki": {
+        "name": "\u0130ron Nagamaki",
+        "level": 70,
+        "cost": 18500,
+        "info": "+70 attack 70 levels required",
+        "type": "Weapon",
+        "shop page": "nagamaki",
+        "stat": 70
+    },
+    "steelnagamaki": {
+        "name": "Steel Nagamaki",
+        "level": 75,
+        "cost": 20000,
+        "info": "+81 attack 75 levels required",
+        "type": "Weapon",
+        "shop page": "nagamaki",
+        "stat": 81
+    },
+    "bambooomiyari": {
+        "name": "Bamboo Omi Yari",
+        "level": 80,
+        "cost": 21500,
+        "info": "+87 attack 80 levels required",
+        "type": "Weapon",
+        "shop page": "omiyari",
+        "stat": 87
+    },
+    "stoneomiyari": {
+        "name": "Stone Omi Yari",
+        "level": 85,
+        "cost": 23000,
+        "info": "+88 attack 85 levels required",
+        "type": "Weapon",
+        "shop page": "omiyari",
+        "stat": 88
+    },
+    "i\u0307ronomiyari": {
+        "name": "\u0130ron Omi Yari",
+        "level": 90,
+        "cost": 24500,
+        "info": "+94 attack 90 levels required",
+        "type": "Weapon",
+        "shop page": "omiyari",
+        "stat": 94
+    },
+    "steelomiyari": {
+        "name": "Steel Omi Yari",
+        "level": 95,
+        "cost": 26000,
+        "info": "+95 attack 95 levels required",
+        "type": "Weapon",
+        "shop page": "omiyari",
+        "stat": 95
+    },
+    "titaniumomiyari": {
+        "name": "Titanium Omi Yari",
+        "level": 100,
+        "cost": 27500,
+        "info": "+111 attack 100 levels required",
+        "type": "Weapon",
+        "shop page": "omiyari",
+        "stat": 111
+    },
+    "bambooarmor": {
+        "name": "Bamboo Armor",
+        "level": 5,
+        "cost": 250,
+        "info": "+2 defence 5 levels required",
+        "type": "Armor",
+        "shop page": "armor",
+        "stat": 2
+    },
+    "leatherarmor": {
+        "name": "Leather Armor",
+        "level": 10,
+        "cost": 1500,
+        "info": "+8 defence 10 levels required",
+        "type": "Armor",
+        "shop page": "armor",
+        "stat": 8
+    },
+    "chainarmor": {
+        "name": "Chain Armor",
+        "level": 15,
+        "cost": 2500,
+        "info": "+9 defence 15 levels required",
+        "type": "Armor",
+        "shop page": "armor",
+        "stat": 9
+    },
+    "ironarmor": {
+        "name": "Iron Armor",
+        "level": 20,
+        "cost": 3500,
+        "info": "+15 defence 20 levels required",
+        "type": "Armor",
+        "shop page": "armor",
+        "stat": 15
+    },
+    "steelarmor": {
+        "name": "Steel Armor",
+        "level": 25,
+        "cost": 5000,
+        "info": "+26 defence 25 levels required",
+        "type": "Armor",
+        "shop page": "armor",
+        "stat": 26
+    },
+    "alloyarmor": {
+        "name": "Alloy Armor",
+        "level": 30,
+        "cost": 6500,
+        "info": "+32 defence 30 levels required",
+        "type": "Armor",
+        "shop page": "armor",
+        "stat": 32
+    },
+    "titaniumarmor": {
+        "name": "Titanium Armor",
+        "level": 35,
+        "cost": 8000,
+        "info": "+33 defence 35 levels required",
+        "type": "Armor",
+        "shop page": "armor",
+        "stat": 33
+    },
+    "emeraldarmor": {
+        "name": "Emerald Armor",
+        "level": 40,
+        "cost": 9500,
+        "info": "+39 defence 40 levels required",
+        "type": "Armor",
+        "shop page": "armor",
+        "stat": 39
+    },
+    "dragonscalearnor": {
+        "name": "Dragon Scale Arnor",
+        "level": 45,
+        "cost": 11000,
+        "info": "+40 defence 45 levels required",
+        "type": "Armor",
+        "shop page": "arnor",
+        "stat": 40
+    },
+    "meteoritearmor": {
+        "name": "Meteorite Armor",
+        "level": 50,
+        "cost": 12500,
+        "info": "+56 defence 50 levels required",
+        "type": "Armor",
+        "shop page": "armor",
+        "stat": 56
+    },
+    "bambooyoroi": {
+        "name": "Bamboo Yoroi",
+        "level": 55,
+        "cost": 14000,
+        "info": "+57 defence 55 levels required",
+        "type": "Armor",
+        "shop page": "yoroi",
+        "stat": 57
+    },
+    "leatheryoroi": {
+        "name": "Leather Yoroi",
+        "level": 60,
+        "cost": 15500,
+        "info": "+63 defence 60 levels required",
+        "type": "Armor",
+        "shop page": "yoroi",
+        "stat": 63
+    },
+    "chainyoroi": {
+        "name": "Chain Yoroi",
+        "level": 65,
+        "cost": 17000,
+        "info": "+64 defence 65 levels required",
+        "type": "Armor",
+        "shop page": "yoroi",
+        "stat": 64
+    },
+    "ironyoroi": {
+        "name": "Iron Yoroi",
+        "level": 70,
+        "cost": 18500,
+        "info": "+70 defence 70 levels required",
+        "type": "Armor",
+        "shop page": "yoroi",
+        "stat": 70
+    },
+    "steelyoroi": {
+        "name": "Steel Yoroi",
+        "level": 75,
+        "cost": 20000,
+        "info": "+81 defence 75 levels required",
+        "type": "Armor",
+        "shop page": "yoroi",
+        "stat": 81
+    },
+    "alloyyoroi": {
+        "name": "Alloy Yoroi",
+        "level": 80,
+        "cost": 21500,
+        "info": "+87 defence 80 levels required",
+        "type": "Armor",
+        "shop page": "yoroi",
+        "stat": 87
+    },
+    "titaniumyoroi": {
+        "name": "Titanium Yoroi",
+        "level": 85,
+        "cost": 23000,
+        "info": "+88 defence 85 levels required",
+        "type": "Armor",
+        "shop page": "yoroi",
+        "stat": 88
+    },
+    "emeraldyoroi": {
+        "name": "Emerald Yoroi",
+        "level": 90,
+        "cost": 24500,
+        "info": "+94 defence 90 levels required",
+        "type": "Armor",
+        "shop page": "yoroi",
+        "stat": 94
+    },
+    "dragonscaleyoroi": {
+        "name": "Dragon Scale Yoroi",
+        "level": 95,
+        "cost": 26000,
+        "info": "+95 defence 95 levels required",
+        "type": "Armor",
+        "shop page": "yoroi",
+        "stat": 95
+    },
+    "meteoriteyoroi": {
+        "name": "Meteorite Yoroi",
+        "level": 100,
+        "cost": 27500,
+        "info": "+111 defence 100 levels required",
+        "type": "Armor",
+        "shop page": "yoroi",
+        "stat": 111
     }
 }
