@@ -6,7 +6,7 @@ def head_tail(ctx):
     db = get_database()["samurai_rpg"]["users"]
     user = db.find_one({"_id":str(ctx.author.id)})
     user_money=user["Gold"]
-    user_text = "".join([i for i in ctx.content.lower().replace("cf ","").replace(" ","") if not i.isdigit()])
+    user_text = "".join([i for i in ctx.content.replace("cf ","").replace(" ","") if not i.isdigit()])
     
     for word in ctx.content.split():
         if word.isdigit():
