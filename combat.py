@@ -28,7 +28,11 @@ def hunt(ctx):
   xp,gold = xp_gold(player_lvl)
   hunt_ready = time_control(player_last,1)
 
-  if hunt_ready == True:
+  if player_health == 0:
+    text = f"{ctx.content.name}, you have 0 health right now, it might help to heal\n `heal [potion]`"
+    return text
+  
+  elif hunt_ready == True:
     turn = 0
     while player_health > 0 and enemy_health > 0:
       if (turn%2) == 0:
@@ -72,9 +76,6 @@ def hunt(ctx):
         text += character.gain_xp(str(ctx.author.id),xp)
         return text
   
-  elif player_health == 0:
-    text = f"{ctx.content.name}, you have 0 health right now, it might help to heal\n `heal [potion]`"
-    return text
         
   else:
     text = "You have to wait "+hunt_ready
