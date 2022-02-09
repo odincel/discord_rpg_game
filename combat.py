@@ -55,6 +55,7 @@ def hunt(ctx):
           turn += 1
 
       if user["Health"] == player_health:
+        value = int(round(player_lvl*1.5))
         player_health -= round(random.randint(0,player_lvl*1.5))
 
       elif player_health <= 0:
