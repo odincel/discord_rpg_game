@@ -182,7 +182,7 @@ async def on_message(ctx):
     if ctx.content.lower().startswith("cf"):
       await gamble.head_tail(ctx)
   
-  else:
+  elif user == None:
     await ctx.channel.send("Type `profile` to start the game.`")
 
 client.run(os.getenv("DC_TOKEN"))
