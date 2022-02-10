@@ -35,8 +35,8 @@
         "shop page": "tanto",
         "stat": 2
     },
-    "i\u0307rontanto": {
-        "name": "\u0130ron Tanto",
+    "irontanto": {
+        "name": "Iron  Tanto",
         "level": 10,
         "cost": 1500,
         "info": "+8 attack 10 levels required",
@@ -71,8 +71,8 @@
         "shop page": "wakizashi",
         "stat": 26
     },
-    "i\u0307ronwakizashi": {
-        "name": "\u0130ron Wakizashi",
+    "irononwakizashi": {
+        "name": "Iron  Wakizashi",
         "level": 30,
         "cost": 6500,
         "info": "+32 attack 30 levels required",
@@ -107,8 +107,8 @@
         "shop page": "katana",
         "stat": 40
     },
-    "i\u0307ronkatana": {
-        "name": "\u0130ron Katana",
+    "irononkatana": {
+        "name": "Iron  Katana",
         "level": 50,
         "cost": 12500,
         "info": "+56 attack 50 levels required",
@@ -143,8 +143,8 @@
         "shop page": "nagamaki",
         "stat": 64
     },
-    "i\u0307ronnagamaki": {
-        "name": "\u0130ron Nagamaki",
+    "irononnagamaki": {
+        "name": "Iron  Nagamaki",
         "level": 70,
         "cost": 18500,
         "info": "+70 attack 70 levels required",
@@ -179,8 +179,8 @@
         "shop page": "omi yari",
         "stat": 88
     },
-    "i\u0307ronomiyari": {
-        "name": "\u0130ron Omi Yari",
+    "irononomiyari": {
+        "name": "Iron  Omi Yari",
         "level": 90,
         "cost": 24500,
         "info": "+94 attack 90 levels required",

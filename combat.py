@@ -17,6 +17,11 @@ for enemy in enemy_dict.keys():
 def hunt(ctx):
   db = get_database()
   user = db["samurai_rpg"]["users"].find_one({"_id":str(ctx.author.id)})
+  
+  if user == None:
+    text = "Type `profile` to start the game."
+    return text
+  
   player_lvl = user["level"]
   player_attack = user["Attack"]
   player_defence = user["Defence"]
@@ -80,7 +85,7 @@ def hunt(ctx):
         text += character.gain_xp(str(ctx.author.id),xp)
         return text
   else:
-    text = "You have to wait "+hunt_ready
+    text = "You have to wait "+ hunt_ready
     return text
        
 def get_enemy(player):
