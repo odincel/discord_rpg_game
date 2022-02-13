@@ -190,17 +190,22 @@ async def on_message(ctx):
     user = get_database()["samurai_rpg"]["users"].find_one({"_id":str(ctx.author.id)})
     user_gold = user["Gold"]
     if user_gold >= pot:
-      start_game,p_hand,d_hand = gamble.blackjack(ctx,pot)
+      start_game,p_hand,d_hand,p_sum = gamble.blackjack(ctx,pot)
+      bj_token = True
       await start_game
-      try:
-        reply_message = await client.wait_for('message',check = lambda message: user["_id"] == str(message.author.id),timeout=15.0)
-      except asyncio.TimeoutError:
-        await ctx.channel.send("**{}** didn't reply".format(user["name"]))
-      else:
-        if reply_message.content.lower() == "hit":
-          print("if")
+      while p_sum < 21 and bj_token == True:
+        try:
+          reply_message = await client.wait_for('message',check = lambda message: user["_id"] == str(message.author.id),timeout=15.0)
+        except asyncio.TimeoutError:
+          await ctx.channel.send("**{}** didn't reply".format(user["name"]))
+          bj_token = False
         else:
-          print("else")
+          if reply_message.content.lower() == "hit" and p_sum < 21:
+            p_hand,p_sum = gamble.hit(p_hand)
+            print(p_hand,p_sum)
+          elif reply_message.content.lower() == "stand":
+            print("else")
+            bj_token = False
     else:
       await ctx.channel.send("`user_gold <= pot`")
 
