@@ -63,7 +63,7 @@ def hunt(ctx):
       value = int(round(player_lvl*1.5))
       player_health -= round(random.randint(0,value))
 
-    elif player_health <= 0:
+    if player_health <= 0:
       text = f"**{enemy}** brutally killed **{ctx.author.name}**"
       update = db["samurai_rpg"]["users"].update({"_id":str(ctx.author.id)},{"$set":{
         "Health":0,
