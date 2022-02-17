@@ -16,8 +16,8 @@ def head_tail(ctx):
 
     if user_text in ("head","tail"):
         if user_money >= pot:
-            flip = random.random(0.0,1.0)
-            if flip<=0.4:
+            flip = random.randint(0,100)
+            if flip<=40:
                 coin_flip = user_text
                 pot *=2
                 user_money += pot
