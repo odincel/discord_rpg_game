@@ -27,7 +27,7 @@ async def on_message(ctx):
     embedVar.add_field(name="Statistics commands", value="`profile`\n`cooldown`\n`inventory`", inline=True)
     embedVar.add_field(name="Combat commands", value="`train`\n`drink`\n`duel [@username]`\n`meditate`", inline=True)
     embedVar.add_field(name="Economy commands", value="`shop`\n`buy [item name]`\n`sell [weapon/armor]`", inline=True)
-    embedVar.add_field(name="Gambling commands", value="`cf [head/tail]`", inline=True)
+    embedVar.add_field(name="Gambling commands", value="`coinflip [head/tail]`\n`blacjack`", inline=True)
     embedVar.add_field(name="Leaderboard", value="`leaderboard top`\n`leaderboard duel`\n`leaderboard weekly`\n`leaderboard monthly`", inline=True)
     await ctx.channel.send(embed=embedVar)
 
@@ -176,7 +176,52 @@ async def on_message(ctx):
     else:
       await ctx.channel.send("**Leaderboard commands**\n`leaderboard top`\n`leaderboard weekly`\n`leaderboard monthly`\n`leaderboard duel`")
     
-  if ctx.content.lower().startswith("cf"):
+  if ctx.content.lower().startswith(("cf","coinflip")):
     await gamble.head_tail(ctx)
+  
+  if ctx.content.lower().startswith(("bj","blackjack")):
+    
+    for word in ctx.content.split():
+        if word.isdigit():
+         pot = int(word)
+        else:
+          pot = 1
+
+    user = get_database()["samurai_rpg"]["users"].find_one({"_id":str(ctx.author.id)})
+    user_gold = user["Gold"]
+    
+    if user_gold >= pot:
+      start_game,p_hand,d_hand,p_sum = gamble.blackjack(ctx,pot)
+      bj_token = True
+      await start_game
+      while p_sum < 21 and bj_token == True:
+        try:
+          reply_message = await client.wait_for('message',check = lambda message: user["_id"] == str(message.author.id),timeout=15.0)
+        except asyncio.TimeoutError:
+          embed = gamble.stand(ctx,pot,p_hand,p_sum,d_hand)
+          await ctx.channel.send(embed=embed)
+          bj_token = False
+        else:
+          if p_sum < 21:
+            if reply_message.content.lower() == "hit":
+              p_hand,p_sum = gamble.hit(p_hand)
+              embed = gamble.bj_message(ctx,pot,p_hand,p_sum,d_hand)
+              if p_sum > 21:
+                embed.add_field(name=f"You Lose",value=f"You busts.\nYou lose {pot} gold",inline=False)
+                bj_token = False
+              if p_sum == 21:
+                embed = gamble.stand(ctx,pot,p_hand,p_sum,d_hand)
+                bj_token = False
+              await ctx.channel.send(embed=embed)
+            elif reply_message.content.lower() == "stand":
+              embed = gamble.stand(ctx,pot,p_hand,p_sum,d_hand)
+              await ctx.channel.send(embed=embed)
+              bj_token = False
+      if p_sum == 21 and bj_token == True:
+        embed = gamble.stand(ctx,pot,p_hand,p_sum,d_hand)
+        await ctx.channel.send(embed=embed)
+        bj_token = False
+    else:
+      await ctx.channel.send(f"**{ctx.author.name}** you can't afford it.")
 
 client.run(os.getenv("DC_TOKEN"))
