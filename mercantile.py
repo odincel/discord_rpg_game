@@ -124,7 +124,7 @@ def sell(ctx,item):
     return text
 
 def shop(ctx):
-  item_name = ctx.content.replace("shop ","").lower() 
+  item_name = ctx.content.replace("shop ","").replace(" ","").lower() 
 
   if item_name in ("tanto","wakizashi","katana","nagamaki","omiyari","armor","yoroi"):
     page_name = f"{item_name.title()} Shop"

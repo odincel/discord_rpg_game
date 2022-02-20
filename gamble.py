@@ -24,13 +24,15 @@ def head_tail(ctx):
 
     if user_text in ("head","tail"):
         if user_money >= pot:
-            coin_flip = random.choice(("head","tail"))
-            if user_text==coin_flip:
+            flip = random.randint(0,100)
+            if flip<=40:
+                coin_flip = user_text
                 pot *=2
                 user_money += pot
                 title = "Win"
                 text = f"You chose {user_text.upper()} and it came {coin_flip.upper()}. You won {pot} gold"
             else:
+                coin_flip = "head" if user_text == "tail" else "tail"
                 user_money -= pot
                 title="Lost"
                 text = f"You chose {user_text.upper()} and it came {coin_flip.upper()}. You lost {pot} gold"

@@ -39,7 +39,7 @@ def hunt(ctx):
   
   elif hunt_ready == True:
     turn = 0
-    while player_health > 0 and enemy_health > 0:
+    while player_health >= 0 and enemy_health >= 0:
       if (turn%2) == 0:
         #player turn
         hit = player_attack - enemy_defence
@@ -59,31 +59,32 @@ def hunt(ctx):
           player_health -= hit
           turn += 1
 
-      if user["Health"] == player_health:
-        value = int(round(player_lvl*1.5))
-        player_health -= round(random.randint(0,value))
+    if user["Health"] == player_health:
+      value = int(round(player_lvl*1.5))
+      player_health -= round(random.randint(0,value))
 
-      elif player_health <= 0:
-        text = f"**{enemy}** brutally killed **{ctx.author.name}**"
-        update = db["samurai_rpg"]["users"].update({"_id":str(ctx.author.id)},{"$set":{
-          "Health":0,
-          "Last Hunt":time.time()
-        }})
-        return text
+    if player_health <= 0:
+      text = f"**{enemy}** brutally killed **{ctx.author.name}**"
+      update = db["samurai_rpg"]["users"].update({"_id":str(ctx.author.id)},{"$set":{
+        "Health":0,
+        "Last Hunt":time.time()
+      }})
+      return text
       
-      elif enemy_health <= 0:
-        text = "**{}** killed a **{}** \nEarned **{}** coins and **{}** xp. \n{} HP is {}/{}".format(
+    elif enemy_health <= 0:
+      text = "**{}** killed a **{}** \nEarned **{}** coins and **{}** xp. \n{} HP is {}/{}".format(
 
-          ctx.author.name,enemy.upper(),gold,xp,ctx.author.name,player_health,user["Max Health"]
-          
-          )
-        update = db["samurai_rpg"]["users"].update({"_id":str(ctx.author.id)},{"$set":{
-          "Health":player_health,
-          "Last Hunt":time.time(),
-          "Gold":int(user["Gold"]+gold)
-          }})
-        text += character.gain_xp(str(ctx.author.id),xp)
-        return text
+        ctx.author.name,enemy.upper(),gold,xp,ctx.author.name,player_health,user["Max Health"]
+        
+        )
+      update = db["samurai_rpg"]["users"].update({"_id":str(ctx.author.id)},{"$set":{
+        "Health":player_health,
+        "Last Hunt":time.time(),
+        "Gold":int(user["Gold"]+gold)
+        }})
+      text += character.gain_xp(str(ctx.author.id),xp)
+      return text
+  
   else:
     text = "You have to wait "+ hunt_ready
     return text
