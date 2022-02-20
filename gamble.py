@@ -1,10 +1,10 @@
 import random
-
-from matplotlib.pyplot import title
 from db import get_database
 import discord
+import json
 
-deck_shape = ("♦️","♣️","♥️","♠️")
+deck_shape = ("bj-spade","bj-diamond","bj-hearth","bj-hearth")
+emoji = json.load(open("data/emoji.json"))
 
 def head_tail(ctx):
     db = get_database()["samurai_rpg"]["users"]
@@ -49,14 +49,15 @@ def head_tail(ctx):
         return ctx.channel.send(text)
 
 def blackjack(ctx,pot):
-  global deck
-  global de
+  user_gold = get_database()["samurai_rpg"]["users"].update({"_id":str(ctx.author.id)},{"$set":{
+  "Gold":get_database()["samurai_rpg"]["users"].find_one({"_id":str(ctx.author.id)})["Gold"]-pot}})
   
+  global deck
   deck = {
-  "♦️":["A",2,3,4,5,6,7,8,9,10,"J","Q","K"],
-  "♣️":["A",2,3,4,5,6,7,8,9,10,"J","Q","K"],
-  "♥️":["A",2,3,4,5,6,7,8,9,10,"J","Q","K"],
-  "♠️":["A",2,3,4,5,6,7,8,9,10,"J","Q","K"]
+  "bj-spade":["A",2,3,4,5,6,7,8,9,10,"J","Q","K"],
+  "bj-diamond":["A",2,3,4,5,6,7,8,9,10,"J","Q","K"],
+  "bj-hearth":["A",2,3,4,5,6,7,8,9,10,"J","Q","K"],
+  "bj-hearth":["A",2,3,4,5,6,7,8,9,10,"J","Q","K"]
   } 
 
   for key in deck.keys():
@@ -70,12 +71,7 @@ def blackjack(ctx,pot):
   p_sum = sum_hand(p_hand)
   d_sum = sum_hand(d_hand)
   
-  embed = discord.Embed(title=discord.Embed.Empty,color=0x3E8B75)
-  embed.set_author(name=ctx.author.name+"blackjack",icon_url=ctx.author.avatar_url)
-  embed.add_field(name="Answer with `hit` to draw another card or stay to `pass`",value=f"Pot size: **{pot}** Gold",inline=False)
-  embed.add_field(name=f"**{ctx.author.name} Hand**",value=f"`{p_hand[0]['num']}{p_hand[0]['shape']}` `{p_hand[1]['num']}{p_hand[1]['shape']}`\nTotal: {p_sum}",inline=True)
-  embed.add_field(name=f"**Dealer Hand**", value=f"`{d_hand[0]['num']}{d_hand[0]['shape']}` `?`\nTotal: `?`",inline=True)
-
+  embed = bj_message(ctx,pot,p_hand,p_sum,d_hand)
   return ctx.channel.send(embed=embed),p_hand,d_hand,p_sum
 
 def deal(hand):
@@ -86,18 +82,19 @@ def deal(hand):
   return hand
 
 def sum_hand(hand):
-  hand_sum = 0
+  hand_list = []
   for i in hand.keys():
     if hand[i]["num"] in ("J","Q","K"):
-      num = 10
+     hand_list.append(10)
     elif hand[i]["num"]=="A":
-      if hand_sum > 21:
-        num = 1
-      else:
-        num = 11
+      hand_list.append(11)
     else:
-      num = hand[i]["num"]  
-    hand_sum += num
+      hand_list.append(hand[i]["num"])
+  hand_sum = sum(hand_list)
+  while hand_sum > 21 and 11 in hand_list:
+      hand_list.pop(hand_list.index(11))
+      hand_list.append(1)
+  hand_sum = sum(hand_list)
   return hand_sum
 
 def hit(hand):
@@ -106,3 +103,59 @@ def hit(hand):
   hand[len(hand.keys())]={"shape":shape,"num":card}
   hand_sum = sum_hand(hand)
   return hand,hand_sum
+
+def bj_message(ctx,pot,p_hand,p_sum,d_hand):
+  text  = ""
+  for card in p_hand.keys():
+    text += "**"+str(p_hand[card]["num"])+"**"+ " " +str(emoji[p_hand[card]['shape']]) + " "
+
+  embed = discord.Embed(title=discord.Embed.Empty,color=0x3E8B75)
+  embed.set_author(name=ctx.author.name+"blackjack",icon_url=ctx.author.avatar_url)
+  embed.add_field(name="Answer with `hit` to draw another card or stay to `stand`",value=f"Pot size: **{pot}** Gold",inline=False)
+  embed.add_field(name= f"{ctx.author.name}" ,value = text + f"\n Total: `{p_sum}`" ,inline=True)
+  embed.add_field(name=f"**Dealer Hand**", value=f"**{d_hand[0]['num']}** {emoji[d_hand[0]['shape']]} `?`\nTotal: `?`",inline=True)
+  return embed
+
+def stand(ctx,pot,p_hand,p_sum,d_hand):
+
+  d_sum = sum_hand(d_hand)
+
+  while d_sum < 17:
+    d_hand,d_sum = hit(d_hand) 
+  if d_sum == p_sum:
+    state = "Tie"
+    embed_value = f" Dealer's hand and your hand are equal."
+  elif d_sum == 21:
+    state = "You Lose"
+    embed_value = f"Dealer got a blackjack.\nYou lose **{pot}** gold"
+  elif d_sum > 21:
+    state = "You Won"
+    embed_value = f"Dealer busts.\nYou won **{pot}** gold"
+  elif d_sum < p_sum:
+    state = "You Won"
+    embed_value = f"Congratulations. Your score is higher than the dealer.\nYou won **{pot}** gold"
+  elif d_sum > p_sum:
+    state = "You Lose"
+    embed_value = f" Your score isn't higher than the dealer.\nYou lose **{pot}** gold"
+
+  if state == "You Won":
+    update = get_database()["samurai_rpg"]["users"].update({"_id":str(ctx.author.id)},{"$set":{
+  "Gold":get_database()["samurai_rpg"]["users"].find_one({"_id":str(ctx.author.id)})["Gold"]+(pot*2)}})
+  elif state =="Tie":
+    update = get_database()["samurai_rpg"]["users"].update({"_id":str(ctx.author.id)},{"$set":{
+  "Gold":get_database()["samurai_rpg"]["users"].find_one({"_id":str(ctx.author.id)})["Gold"]+pot}})
+
+  text_player = ""
+  text_dealer = ""
+  for card in p_hand.keys():
+    text_player += "**"+str(p_hand[card]["num"])+ "** " + " " + str(emoji[p_hand[card]['shape']]) + " "
+  for card in d_hand.keys():
+    text_dealer += "**"+str(d_hand[card]["num"])+ "** "+ " " +str(emoji[d_hand[card]['shape']]) + " "
+
+  embed = discord.Embed(title=discord.Embed.Empty,color=0x3E8B75)
+  embed.set_author(name=ctx.author.name+"blackjack",icon_url=ctx.author.avatar_url)
+  embed.add_field(name= f"{ctx.author.name}" ,value = text_player + f"\n Total: `{p_sum}`" ,inline=True)
+  embed.add_field(name=f"**Dealer Hand**", value= text_dealer+f"\nTotal: `{d_sum}`",inline=True)
+  embed.add_field(name=state,value=embed_value,inline=False)
+
+  return embed
