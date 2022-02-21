@@ -1,9 +1,11 @@
 import json
+from os import rename
 import discord
 from db import get_database
 
 shop_list = json.load(open("data/shop.json"))
 levels = json.load(open("data/levels.json"))
+item_short = json.load(open("data/itemshort.json"))
 
 def inventory(ctx):
   db = get_database()["samurai_rpg"]["users"]
@@ -26,6 +28,8 @@ def buy(ctx,item,piece):
   db = get_database()["samurai_rpg"]["users"]
   user = db.find_one({"_id":str(ctx.author.id)})
   player_gold = user["Gold"]
+
+  item = rename_item(item)
 
   item_type = shop_list[item]["type"]
   item_cost = shop_list[item]["cost"]*piece
@@ -68,7 +72,7 @@ def buy(ctx,item,piece):
         return text
 
       else:
-        text = f"{ctx.author.name} now you have a {user['Weapon']}.\nYou need sell your current weapon.\n`sell weapon` to make the sale weapon"
+        text = f"{ctx.author.name} you already have a {user['Weapon']}.\nYou need sell your current weapon.\n`sell weapon` to make the sale weapon"
         return text
 
     if item_type == "Armor":
@@ -130,13 +134,13 @@ def shop(ctx):
     page_name = f"{item_name.title()} Shop"
     
     if item_name in ("tanto","wakizashi","katana","nagamaki","omi yari"):
-      footer = "!shop [tanto] [wakizashi] [katana] [nagamaki] [omi yari]" 
+      footer = "shop [tanto] [wakizashi] [katana] [nagamaki] [omi yari]" 
     
     elif item_name in ("armor","yoroi"):
-      footer = "!shop [armor] [yoroi]"
+      footer = "shop [armor] [yoroi]"
 
     else:
-      footer = "!shop [potion] [tanto] [armor]"
+      footer = "shop [potion] [tanto] [armor]"
     
     text = ""
     for key in shop_list.keys():
@@ -145,7 +149,7 @@ def shop(ctx):
   
   else:
     page_name = "Basic Items"
-    footer = "!shop [potion] [tanto] [armor]"
+    footer = "shop [potion] [tanto] [armor]"
     text = ""
     for key in shop_list.keys():
       if shop_list[key]["shop page"] == "basic":
@@ -153,3 +157,10 @@ def shop(ctx):
 
     
   return page_name,footer,text
+
+def rename_item(item):
+  for key, value in item_short.items():
+    if item in value:
+      return key
+    else:
+      return item
