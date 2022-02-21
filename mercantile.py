@@ -29,8 +29,6 @@ def buy(ctx,item,piece):
   user = db.find_one({"_id":str(ctx.author.id)})
   player_gold = user["Gold"]
 
-  item = rename_item(item)
-
   item_type = shop_list[item]["type"]
   item_cost = shop_list[item]["cost"]*piece
 
@@ -108,7 +106,7 @@ def sell(ctx,item):
   player_item = user[item]
   if player_item != None:
     item_name = player_item.lower().replace(" ","")
-    item_cost = shop_list[item_name]["cost"]*0.8
+    item_cost = int(shop_list[item_name]["cost"]*0.8)
     item_stat = shop_list[item_name]["stat"]
 
     gold = user["Gold"] + item_cost

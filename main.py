@@ -135,7 +135,8 @@ async def on_message(ctx):
 
   if ctx.content.lower().startswith("buy"): 
     item = "".join([i for i in ctx.content.lower().replace("buy ","").replace(" ","") if not i.isdigit()])
-    
+    item = mercantile.rename_item(item)
+
     for word in ctx.content.split():
         if word.isdigit():
          piece = int(word)
