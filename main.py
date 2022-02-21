@@ -27,7 +27,7 @@ async def on_message(ctx):
     embedVar.add_field(name="Statistics commands", value="`profile`\n`cooldown`\n`inventory`", inline=True)
     embedVar.add_field(name="Combat commands", value="`train`\n`drink`\n`duel [@username]`\n`meditate`", inline=True)
     embedVar.add_field(name="Economy commands", value="`shop`\n`buy [item name]`\n`sell [weapon/armor]`", inline=True)
-    embedVar.add_field(name="Gambling commands", value="`coinflip [head/tail]`\n`blacjack`", inline=True)
+    embedVar.add_field(name="Gambling commands", value="`coinflip [head/tail] [pot]`\n`blacjack [pot]`", inline=True)
     embedVar.add_field(name="Leaderboard", value="`leaderboard top`\n`leaderboard duel`\n`leaderboard weekly`\n`leaderboard monthly`", inline=True)
     await ctx.channel.send(embed=embedVar)
 
@@ -126,7 +126,7 @@ async def on_message(ctx):
     page_name,footer,text = mercantile.shop(ctx)
 
     if page_name != None:
-      embed_shop = discord.Embed(title="Shop `!buy [item]`")
+      embed_shop = discord.Embed(title="Shop `buy [item]`")
       embed_shop.add_field(name=page_name,value=text)
       embed_shop.set_footer(text = footer)
       await ctx.channel.send(embed=embed_shop)
