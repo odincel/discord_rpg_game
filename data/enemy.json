@@ -19,6 +19,14 @@
     "level":1,
     "info":""
   },
+  "Skeleton":{
+    "level":1,
+    "info":""
+  },
+  "Goblin Guard":{
+    "level":2,
+    "info":""
+  },
   "Swarm Of Bats":{
     "level":2,
     "info":""
@@ -51,6 +59,10 @@
     "level":3,
     "info":""
   },
+  "Zombie":{
+    "level":3,
+    "info":""
+  },
   "Gaint Snake":{
     "level":4,
     "info":""
@@ -67,11 +79,19 @@
     "level":4,
     "info":""
   },
+  "Ghoul":{
+    "level":4,
+    "info":""
+  },
   "Hobgoblin":{
     "level":5,
     "info":""
   },
   "Animated Karuta":{
+    "level":5,
+    "info":""
+  },
+  "Ogre":{
     "level":5,
     "info":""
   },
@@ -81,6 +101,14 @@
   },
   "Samurai Specter":{
     "level":5,
+    "info":""
+  },
+  "Werewolf":{
+    "level":5,
+    "info":""
+  },
+  "Ghast":{
+    "level":6,
     "info":""
   },
   "Enenra":{
@@ -95,15 +123,27 @@
     "level":6,
     "info":""
   },
+  "Wraith":{
+    "level":6,
+    "info":""
+  },
   "Funayurei":{
     "level":6,
     "info":"The angry ghosts of people who died at sea."
+  },
+  "Bloodbones":{
+    "level":7,
+    "info":""
   },
   "Furutsubaki-no-rei":{
     "level":7,
     "info":"A soul-sucking plant."
   },
   "Hihi":{
+    "level":7,
+    "info":""
+  },
+  "Minotaur":{
     "level":7,
     "info":""
   },
@@ -135,103 +175,102 @@
    "level":9,
    "info":" A woman who transformed into a serpent demon out of the rage of unrequited love."
  },
-
-"Kotobuki":{
-  "level":9,
-  "info":"A Japanese chimera with the head of a rat, the ears of a rabbit, the horns of an ox, the comb of a rooster, the beard of a sheep, the neck of a dragon, the back of a boar, the shoulders and belly of a tiger, the arms of a monkey, the hindquarters of a dog, and the tail of a snake."
-},
-"Kubikajiri":{
-  "level":9,
-  "info":"A headless beast(ghost) that stinks of blood and eats the heads of its victims."
-},
-"Wanyūdō":{
-  "level":9,
-  "info":"A flaming wheel with a man's head in the center, that sucks out the soul of anyone who sees it."
-},
-"Jorogumo":{
-  "level":9,
-  "info":"Enormous, spider-like demons. In most stories, they’re depicted as evil and hungry for human flesh. In order to catch prey, they can disguise themselves as attractive women."
-},
-"Furaribi":{
-  "level":10,
-  "info":""
-},
-"Fūri":{
-  "level":10,
-  "info":""
-},
-"Gagoze":{
-  "level":10,
-  "info":""
-},
-"Ibaraki-doji":{
-  "level":10,
-  "info":""
-},
-"Itsumade":{
-  "level":11,
-  "info":""
-},
-"Ittan-momen":{
-  "level":11,
-  "info":""
-},
-"Jubokko":{
-  "level":11,
-  "info":""
-},
-"Dust devil":{
-  "level":11,
-  "info":""
-},
-"Kamaitachi":{
-  "level":12,
-  "info":""
-},
-"Karasu-tengu":{
-  "level":12,
-  "info":""
-},
-"Kasa-obake":{
-  "level":12,
-  "info":""
-},
-"Kasha":{
-  "level":12,
-  "info":""
-},
-"Katawaguruma":{
-  "level":13,
-  "info":""
-},
-"Kechibi":{
-  "level":13,
-  "info":""
-},
-"Konaki-jiji":{
-  "level":13,
-  "info":""
-},
-"Kyonshii":{
-  "level":13,
-  "info":""
-},
-"Mōryō":{
-  "level":14,
-  "info":""
-},
-"Noppera-bō":{
-  "level":14,
-  "info":""
-},
-"Nure-onna":{
-  "level":14,
-  "info":""
-},
-"Ōgama":{
-  "level":14,
-  "info":""
-}
+  "Kotobuki":{
+    "level":9,
+    "info":"A Japanese chimera with the head of a rat, the ears of a rabbit, the horns of an ox, the comb of a rooster, the beard of a sheep, the neck of a dragon, the back of a boar, the shoulders and belly of a tiger, the arms of a monkey, the hindquarters of a dog, and the tail of a snake."
+  },
+  "Kubikajiri":{
+    "level":9,
+    "info":"A headless beast(ghost) that stinks of blood and eats the heads of its victims."
+  },
+  "Wanyūdō":{
+    "level":9,
+    "info":"A flaming wheel with a man's head in the center, that sucks out the soul of anyone who sees it."
+  },
+  "Jorogumo":{
+    "level":9,
+    "info":"Enormous, spider-like demons. In most stories, they’re depicted as evil and hungry for human flesh. In order to catch prey, they can disguise themselves as attractive women."
+  },
+  "Furaribi":{
+    "level":10,
+    "info":""
+  },
+  "Fūri":{
+    "level":10,
+    "info":""
+  },
+  "Gagoze":{
+    "level":10,
+    "info":""
+  },
+  "Ibaraki-doji":{
+    "level":10,
+    "info":""
+  },
+  "Itsumade":{
+    "level":11,
+    "info":""
+  },
+  "Ittan-momen":{
+    "level":11,
+    "info":""
+  },
+  "Jubokko":{
+    "level":11,
+    "info":""
+  },
+  "Dust devil":{
+    "level":11,
+    "info":""
+  },
+  "Kamaitachi":{
+    "level":12,
+    "info":""
+  },
+  "Karasu-tengu":{
+    "level":12,
+    "info":""
+  },
+  "Kasa-obake":{
+    "level":12,
+    "info":""
+  },
+  "Kasha":{
+    "level":12,
+    "info":""
+  },
+  "Katawaguruma":{
+    "level":13,
+    "info":""
+  },
+  "Kechibi":{
+    "level":13,
+    "info":""
+  },
+  "Konaki-jiji":{
+    "level":13,
+    "info":""
+  },
+  "Kyonshii":{
+    "level":13,
+    "info":""
+  },
+  "Mōryō":{
+    "level":14,
+    "info":""
+  },
+  "Noppera-bō":{
+    "level":14,
+    "info":""
+  },
+  "Nure-onna":{
+    "level":14,
+    "info":""
+  },
+  "Ōgama":{
+    "level":14,
+    "info":""
+  }
 
 
 
