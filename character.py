@@ -112,7 +112,7 @@ def drink(ctx,item,piece):
           "Health":health,
           "Inventory":inv
           }})
-        text = f"{ctx.author.name}, you drank the elixir and recovered your soul.\nYou've restored {shop_list[item]['stat']} health, now your health is {health}"
+        text = f"{ctx.author.name}, you drank the elixir and recovered your soul.\nYou've restored {shop_list[item]['stat']*piece} health, now your health is {health}"
         return text
       elif user_health == user_max_health:
         text = "Your health already full"
